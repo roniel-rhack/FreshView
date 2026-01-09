@@ -44,5 +44,5 @@ const manager = new Manager();
 chrome.runtime.onMessage.addListener(onMessageListener);
 chrome.storage.onChanged.addListener(onStorageChangedListener);
 
-// Activate the extension icon in the browser toolbar.
-chrome.runtime.sendMessage({type: "showPageAction"});
+// Note: In MV3, the action icon is always visible, so we no longer need
+// to send "showPageAction" messages to the background script.
