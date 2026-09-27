@@ -1,0 +1,218 @@
+{
+  "extensionDescription": {
+    "message": "視聴済みの YouTube™ 動画を非表示にして、新しい動画を見つけましょう。",
+    "description": "Hide watched YouTube™ videos and discover fresh content."
+  },
+  "commandHide": {
+    "message": "視聴済み動画の非表示を切り替える",
+    "description": "Toggle hiding watched videos"
+  },
+  "commandThreshold": {
+    "message": "視聴率のしきい値を切り替える",
+    "description": "Toggle watch threshold"
+  },
+  "optionsTitle": {
+    "message": "FreshView の設定",
+    "description": "FreshView settings"
+  },
+  "preferences": {
+    "message": "設定",
+    "description": "Settings"
+  },
+  "appearance": {
+    "message": "外観",
+    "description": "Appearance"
+  },
+  "appearanceHelp": {
+    "message": "ブラウザーに合わせて FreshView の表示を調整します。",
+    "description": "Make FreshView feel at home in your browser."
+  },
+  "languageNote": {
+    "message": "言語はブラウザーの設定に自動で合わせます。",
+    "description": "Language follows your browser automatically."
+  },
+  "theme": {
+    "message": "テーマ",
+    "description": "Theme"
+  },
+  "themeHelp": {
+    "message": "「システム」はデバイスのライト・ダーク設定に合わせます。",
+    "description": "System follows your device’s light or dark appearance."
+  },
+  "themeSystem": {
+    "message": "システム",
+    "description": "System"
+  },
+  "themeLight": {
+    "message": "ライト",
+    "description": "Light"
+  },
+  "themeDark": {
+    "message": "ダーク",
+    "description": "Dark"
+  },
+  "filters": {
+    "message": "フィルター",
+    "description": "Filters"
+  },
+  "filtersHelp": {
+    "message": "視聴済み動画を非表示にする場所を選びます。非表示が有効なときに適用されます。",
+    "description": "Choose where to hide watched videos. These filters apply when hiding is enabled."
+  },
+  "types": {
+    "message": "動画の種類",
+    "description": "Video types"
+  },
+  "pages": {
+    "message": "YouTube のページ",
+    "description": "YouTube pages"
+  },
+  "hideTitle": {
+    "message": "視聴済み動画を非表示",
+    "description": "Hide watched videos"
+  },
+  "hideHelp": {
+    "message": "まだ見ていない動画を表示します。",
+    "description": "Keep unwatched videos in view."
+  },
+  "thresholdTitle": {
+    "message": "視聴率のしきい値",
+    "description": "Minimum watched"
+  },
+  "thresholdSummary": {
+    "message": "$PERCENT$ 以上視聴した動画を非表示にします。",
+    "placeholders": {
+      "percent": {
+        "content": "$1",
+        "example": "90%"
+      }
+    },
+    "description": "Hide videos watched at least $PERCENT$."
+  },
+  "thresholdOff": {
+    "message": "最後まで視聴した動画（100%）のみ非表示にします。",
+    "description": "Only fully watched videos (100%) are hidden."
+  },
+  "thresholdAria": {
+    "message": "$PERCENT$ 視聴済み",
+    "placeholders": {
+      "percent": {
+        "content": "$1",
+        "example": "90%"
+      }
+    },
+    "description": "$PERCENT$ watched"
+  },
+  "lockPage": {
+    "message": "このページの設定を固定",
+    "description": "Lock setting on this page"
+  },
+  "unlockPage": {
+    "message": "このページの固定を解除",
+    "description": "Unlock this page"
+  },
+  "lockHelp": {
+    "message": "このページの URL に現在の非表示設定を保存します。",
+    "description": "Save the current hiding setting for this exact page."
+  },
+  "lockedOn": {
+    "message": "このページでは非表示がオンに固定されています。変更するには固定を解除してください。",
+    "description": "Hiding is locked on for this page. Unlock to change it."
+  },
+  "lockedOff": {
+    "message": "このページでは非表示がオフに固定されています。変更するには固定を解除してください。",
+    "description": "Hiding is locked off for this page. Unlock to change it."
+  },
+  "openYoutube": {
+    "message": "動画を非表示にするには YouTube のページを開いてください。",
+    "description": "Open a YouTube page to hide videos."
+  },
+  "refreshYoutube": {
+    "message": "FreshView を接続するには、この YouTube ページを再読み込みしてください。",
+    "description": "Refresh this YouTube page to connect FreshView."
+  },
+  "excludedPage": {
+    "message": "このページのフィルターは設定で無効になっています。",
+    "description": "Filtering is disabled for this page in Settings."
+  },
+  "recommendations": {
+    "message": "おすすめ動画",
+    "description": "Recommendations"
+  },
+  "recommendationsHelp": {
+    "message": "プレーヤーの横に表示されるおすすめ動画。",
+    "description": "Videos recommended beside the player."
+  },
+  "playlists": {
+    "message": "再生リストの動画",
+    "description": "Playlist videos"
+  },
+  "playlistsHelp": {
+    "message": "再生リスト自体ではなく、リスト内の個別の動画。",
+    "description": "Individual videos inside a playlist, not the playlist itself."
+  },
+  "searches": {
+    "message": "検索結果",
+    "description": "Search results"
+  },
+  "searchesHelp": {
+    "message": "YouTube で検索したときに表示される動画。",
+    "description": "Videos shown when you search YouTube."
+  },
+  "channels": {
+    "message": "チャンネル",
+    "description": "Channels"
+  },
+  "channelsHelp": {
+    "message": "チャンネルページの動画。",
+    "description": "Videos on a channel’s page."
+  },
+  "home": {
+    "message": "ホーム",
+    "description": "Home"
+  },
+  "homeHelp": {
+    "message": "YouTube のホームページの動画。",
+    "description": "Videos on your YouTube home page."
+  },
+  "explore": {
+    "message": "探索",
+    "description": "Explore"
+  },
+  "exploreHelp": {
+    "message": "探索ページや急上昇ページの動画。",
+    "description": "Videos on Explore and Trending pages."
+  },
+  "subscriptions": {
+    "message": "登録チャンネル",
+    "description": "Subscriptions"
+  },
+  "subscriptionsHelp": {
+    "message": "登録しているチャンネルの動画。",
+    "description": "Videos from channels you subscribe to."
+  },
+  "library": {
+    "message": "マイページ / ライブラリ",
+    "description": "You / Library"
+  },
+  "libraryHelp": {
+    "message": "YouTube の個人用ページの動画。",
+    "description": "Videos in your personal YouTube area."
+  },
+  "history": {
+    "message": "履歴",
+    "description": "History"
+  },
+  "historyHelp": {
+    "message": "以前見た動画を探せるよう、初期設定ではオフです。",
+    "description": "Off by default so you can find videos you watched before."
+  },
+  "uiLanguage": {
+    "message": "ja",
+    "description": "BCP 47 language of this translation, used by screen readers."
+  },
+  "uiDirection": {
+    "message": "ltr",
+    "description": "Reading direction of this translation."
+  }
+}

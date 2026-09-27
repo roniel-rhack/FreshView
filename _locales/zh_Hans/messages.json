@@ -1,0 +1,218 @@
+{
+  "extensionDescription": {
+    "message": "隐藏已观看的 YouTube™ 视频，发现新内容。",
+    "description": "Hide watched YouTube™ videos and discover fresh content."
+  },
+  "commandHide": {
+    "message": "切换隐藏已观看视频",
+    "description": "Toggle hiding watched videos"
+  },
+  "commandThreshold": {
+    "message": "切换观看进度阈值",
+    "description": "Toggle watch threshold"
+  },
+  "optionsTitle": {
+    "message": "FreshView 设置",
+    "description": "FreshView settings"
+  },
+  "preferences": {
+    "message": "设置",
+    "description": "Settings"
+  },
+  "appearance": {
+    "message": "外观",
+    "description": "Appearance"
+  },
+  "appearanceHelp": {
+    "message": "让 FreshView 更适合你的浏览器。",
+    "description": "Make FreshView feel at home in your browser."
+  },
+  "languageNote": {
+    "message": "语言会自动跟随浏览器设置。",
+    "description": "Language follows your browser automatically."
+  },
+  "theme": {
+    "message": "主题",
+    "description": "Theme"
+  },
+  "themeHelp": {
+    "message": "“跟随系统”会使用设备的浅色或深色外观。",
+    "description": "System follows your device’s light or dark appearance."
+  },
+  "themeSystem": {
+    "message": "跟随系统",
+    "description": "System"
+  },
+  "themeLight": {
+    "message": "浅色",
+    "description": "Light"
+  },
+  "themeDark": {
+    "message": "深色",
+    "description": "Dark"
+  },
+  "filters": {
+    "message": "过滤规则",
+    "description": "Filters"
+  },
+  "filtersHelp": {
+    "message": "选择隐藏已观看视频的位置。启用隐藏后，这些规则才会生效。",
+    "description": "Choose where to hide watched videos. These filters apply when hiding is enabled."
+  },
+  "types": {
+    "message": "视频类型",
+    "description": "Video types"
+  },
+  "pages": {
+    "message": "YouTube 页面",
+    "description": "YouTube pages"
+  },
+  "hideTitle": {
+    "message": "隐藏已观看视频",
+    "description": "Hide watched videos"
+  },
+  "hideHelp": {
+    "message": "保留尚未观看的视频。",
+    "description": "Keep unwatched videos in view."
+  },
+  "thresholdTitle": {
+    "message": "最低观看进度",
+    "description": "Minimum watched"
+  },
+  "thresholdSummary": {
+    "message": "隐藏观看进度达到 $PERCENT$ 的视频。",
+    "placeholders": {
+      "percent": {
+        "content": "$1",
+        "example": "90%"
+      }
+    },
+    "description": "Hide videos watched at least $PERCENT$."
+  },
+  "thresholdOff": {
+    "message": "仅隐藏已完整观看（100%）的视频。",
+    "description": "Only fully watched videos (100%) are hidden."
+  },
+  "thresholdAria": {
+    "message": "已观看 $PERCENT$",
+    "placeholders": {
+      "percent": {
+        "content": "$1",
+        "example": "90%"
+      }
+    },
+    "description": "$PERCENT$ watched"
+  },
+  "lockPage": {
+    "message": "固定此页面的设置",
+    "description": "Lock setting on this page"
+  },
+  "unlockPage": {
+    "message": "解除此页面的固定设置",
+    "description": "Unlock this page"
+  },
+  "lockHelp": {
+    "message": "为当前页面的完整网址保存隐藏设置。",
+    "description": "Save the current hiding setting for this exact page."
+  },
+  "lockedOn": {
+    "message": "此页面已固定为隐藏。请先解除固定再更改。",
+    "description": "Hiding is locked on for this page. Unlock to change it."
+  },
+  "lockedOff": {
+    "message": "此页面已固定为不隐藏。请先解除固定再更改。",
+    "description": "Hiding is locked off for this page. Unlock to change it."
+  },
+  "openYoutube": {
+    "message": "请打开 YouTube 页面以隐藏视频。",
+    "description": "Open a YouTube page to hide videos."
+  },
+  "refreshYoutube": {
+    "message": "请刷新此 YouTube 页面以连接 FreshView。",
+    "description": "Refresh this YouTube page to connect FreshView."
+  },
+  "excludedPage": {
+    "message": "此页面的过滤功能已在设置中关闭。",
+    "description": "Filtering is disabled for this page in Settings."
+  },
+  "recommendations": {
+    "message": "推荐视频",
+    "description": "Recommendations"
+  },
+  "recommendationsHelp": {
+    "message": "播放器旁的推荐视频。",
+    "description": "Videos recommended beside the player."
+  },
+  "playlists": {
+    "message": "播放列表中的视频",
+    "description": "Playlist videos"
+  },
+  "playlistsHelp": {
+    "message": "播放列表中的单个视频，不会隐藏整个列表。",
+    "description": "Individual videos inside a playlist, not the playlist itself."
+  },
+  "searches": {
+    "message": "搜索结果",
+    "description": "Search results"
+  },
+  "searchesHelp": {
+    "message": "在 YouTube 搜索时显示的视频。",
+    "description": "Videos shown when you search YouTube."
+  },
+  "channels": {
+    "message": "频道",
+    "description": "Channels"
+  },
+  "channelsHelp": {
+    "message": "频道页面上的视频。",
+    "description": "Videos on a channel’s page."
+  },
+  "home": {
+    "message": "首页",
+    "description": "Home"
+  },
+  "homeHelp": {
+    "message": "YouTube 首页上的视频。",
+    "description": "Videos on your YouTube home page."
+  },
+  "explore": {
+    "message": "探索",
+    "description": "Explore"
+  },
+  "exploreHelp": {
+    "message": "探索和热门页面上的视频。",
+    "description": "Videos on Explore and Trending pages."
+  },
+  "subscriptions": {
+    "message": "订阅",
+    "description": "Subscriptions"
+  },
+  "subscriptionsHelp": {
+    "message": "你订阅的频道发布的视频。",
+    "description": "Videos from channels you subscribe to."
+  },
+  "library": {
+    "message": "我的 / 媒体库",
+    "description": "You / Library"
+  },
+  "libraryHelp": {
+    "message": "YouTube 个人页面中的视频。",
+    "description": "Videos in your personal YouTube area."
+  },
+  "history": {
+    "message": "历史记录",
+    "description": "History"
+  },
+  "historyHelp": {
+    "message": "默认关闭，以便查找之前看过的视频。",
+    "description": "Off by default so you can find videos you watched before."
+  },
+  "uiLanguage": {
+    "message": "zh-Hans",
+    "description": "BCP 47 language of this translation, used by screen readers."
+  },
+  "uiDirection": {
+    "message": "ltr",
+    "description": "Reading direction of this translation."
+  }
+}

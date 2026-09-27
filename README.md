@@ -1,135 +1,226 @@
-<h1>
-  <img src="img/icon24.png" alt=""/> FreshView for YouTube™
-</h1>
+<p align="center">
+  <img src="img/icon48.png" width="48" height="48" alt="FreshView logo">
+</p>
 
-Hide watched YouTube video cards to discover fresh content. FreshView reads the watch-progress bars already displayed by YouTube and filters cards locally. It does not retrieve your account history, contact a backend, or send browsing data elsewhere.
-
-This is the maintained fork by [roniel-rhack](https://github.com/roniel-rhack) of [Mandrenkov's original FreshView](https://github.com/Mandrenkov/FreshView).
+<h1 align="center">FreshView for YouTube™</h1>
 
 <p align="center">
-  <img src="assets/popups.png" alt="FreshView popup in light and dark themes" width="600"/>
+  Hide watched videos. Find something new.<br>
+  <strong>Local filtering · Six languages · System, light &amp; dark themes</strong>
 </p>
+
+<p align="center">
+  <a href="#install">Install</a> ·
+  <a href="#quick-start">Quick start</a> ·
+  <a href="#languages-and-appearance">Languages</a> ·
+  <a href="#privacy-and-permissions">Privacy</a> ·
+  <a href="#development">Development</a>
+</p>
+
+FreshView hides YouTube video cards using the watch-progress bars already displayed on the page. Your preferences stay on your device: no account-history retrieval, backend, or browsing-data collection.
+
+Maintained by [roniel-rhack](https://github.com/roniel-rhack), based on [Mandrenkov's original FreshView](https://github.com/Mandrenkov/FreshView).
+
+> **Development version: 3.2.0.** The screenshots and instructions below show this version. It has not been submitted to the browser stores; see [store availability](#install) before installing.
+
+## A look at FreshView
+
+Enable hiding, choose how much of a video counts as watched, and lock that preference to a specific page.
+
+<table>
+  <tr>
+    <th>Light theme</th>
+    <th>Dark theme</th>
+  </tr>
+  <tr>
+    <td><img src="assets/ui-3.2.0/popup-light.png" width="380" alt="FreshView 3.2.0 popup in light theme, with hiding enabled and a 90 percent threshold"></td>
+    <td><img src="assets/ui-3.2.0/popup-dark.png" width="380" alt="FreshView 3.2.0 popup in dark theme, with hiding enabled and a 90 percent threshold"></td>
+  </tr>
+</table>
+
+Settings brings appearance, video types, and page filters together. Labels are clickable, controls support the keyboard, and the layout adapts to narrow windows and enlarged text.
+
+<p align="center">
+  <img src="assets/ui-3.2.0/settings-light.png" width="760" alt="FreshView 3.2.0 settings in light theme, showing the theme selector and video-type and page filters">
+</p>
+
+<details>
+<summary>View Settings in dark theme</summary>
+
+<p align="center">
+  <img src="assets/ui-3.2.0/settings-dark.png" width="760" alt="FreshView 3.2.0 settings in dark theme with the same appearance and filter controls">
+</p>
+
+</details>
+
+*Screenshots captured from the 3.2.0 development extension. The popup was connected to a controlled YouTube test page; no personal browsing data is shown.*
 
 ## Install
 
-Store status last checked on **September 27, 2026**:
+**Last confirmed store status: September 27, 2026.** Store submissions and public availability are separate steps.
 
-| Browser | Public release | Submitted release |
+| Browser | Available to install | Under review |
 | --- | --- | --- |
-| Chrome | **3.0.0** — [Install from the Chrome Web Store](https://chromewebstore.google.com/detail/freshview-for-youtube/glologkcncopfogmaghfgcoloklmella) | **3.1.0**, pending review; automatic publication after approval |
-| Firefox | This fork's first release is not yet publicly available | **3.1.0**, awaiting Mozilla review; [Add-ons listing](https://addons.mozilla.org/en-US/firefox/addon/freshview-youtube-roniel/) becomes available after approval |
+| **Chrome** | [Chrome Web Store — 3.0.0](https://chromewebstore.google.com/detail/freshview-for-youtube/glologkcncopfogmaghfgcoloklmella) | **3.1.0**, submitted with automatic publication after approval |
+| **Firefox** | This fork's first public release is awaiting approval | **3.1.0** — [Mozilla Add-ons listing](https://addons.mozilla.org/en-US/firefox/addon/freshview-youtube-roniel/) becomes available after approval |
 
-Both submissions were completed on September 27, 2026. Submission does not mean approval or public availability. Other similarly named Firefox extensions belong to different maintainers. The packaging workflow does not publish to stores.
+Both 3.1.0 submissions were completed on September 27, 2026. Similarly named Firefox extensions may belong to other maintainers. GitHub's packaging workflow does not publish to either store.
 
-### Load the development version
+### Try the development version
 
-There is no build step or dependency installation for the extension itself.
+No build step or dependency installation is needed for the extension itself.
 
-- **Chrome 121+ / compatible Chromium browsers:** open `chrome://extensions` (or `edge://extensions`), enable Developer mode, choose **Load unpacked**, and select this repository's root directory.
-- **Firefox 142+:** open `about:debugging#/runtime/this-firefox`, choose **Load Temporary Add-on**, and select `manifest.json`. Temporary installation lasts until Firefox restarts. Allow access to YouTube if Firefox requests it.
+| Browser | Requirements | Load locally |
+| --- | --- | --- |
+| Chrome / compatible Chromium | **Chrome 121+** | Open `chrome://extensions` (or `edge://extensions`), enable **Developer mode**, choose **Load unpacked**, and select this repository's root folder. |
+| Firefox | **Firefox 142+** | Open `about:debugging#/runtime/this-firefox`, choose **Load Temporary Add-on**, and select `manifest.json`. Allow access to YouTube if requested. |
 
-The manifest uses a service worker in Chromium and background scripts in Firefox. The Firefox add-on ID is `freshview@roniel-rhack.github.io`; preserve it for all future updates. Store packages require Mozilla validation and signing.
+Firefox's temporary installation lasts until the browser restarts. After changing or updating a local installation, reload the extension and refresh open YouTube tabs.
 
-After changing or updating the unpacked extension, reload it from the browser's extensions page and refresh open YouTube tabs.
+## Quick start
 
-## Use FreshView
+1. Open [desktop YouTube](https://www.youtube.com/).
+2. Open FreshView and enable **Hide watched videos**. It is off by default.
+3. Adjust **Minimum watched**. The default is **90%**; turning this control off hides only videos marked **100% watched**.
+4. Open **Settings** to choose page filters, video types, and appearance. **History** is excluded by default.
 
-1. Open desktop YouTube at `https://www.youtube.com/`.
-2. Open the FreshView toolbar popup and enable **Hide Videos**. It is off by default.
-3. Set **View Threshold** to the minimum watched percentage. The default is **90%**. Disabling the threshold means only cards marked **100% watched** are hidden.
-4. Open **Options** to select page and video-type filters or switch between light and dark themes. History is excluded by default.
+### Lock a page's preference
 
-The lock control saves the current Hide Videos state for the exact page, including its query string. That saved state overrides the global toggle until the page is unlocked. Page exclusions in Options still take precedence.
+Choose **Lock setting on this page** to save the current hiding state for that exact URL, including its query string. This saved choice overrides the global toggle until you choose **Unlock this page**. Page exclusions in Settings still take precedence.
 
-Supported filters include Home, channels, Explore/Trending, You/Library, History, subscriptions, search results, playlist video rows, and recommendations. Modern `yt-lockup-view-model` video cards and legacy renderers are supported. Playlist/course summary cards, advertisements, and Shorts are excluded.
+The popup also explains when a page is excluded, unsupported, or needs refreshing to connect to FreshView.
 
-The popup explains when the current tab is unsupported, a page is excluded or locked, or YouTube needs to be refreshed. The Options button, switches, lock, and threshold slider support keyboard navigation.
+### Where filtering works
 
-### Limits
+| Supported pages | Supported video types |
+| --- | --- |
+| Home, channels, Explore/Trending, You/Library, History, subscriptions, search, and playlists | Regular video cards, recommendations, search results, and individual playlist videos |
 
-- Filtering depends on progress indicators present in YouTube's DOM. A video with no usable progress indicator stays visible, even if you remember watching it.
-- YouTube may change its markup or serve different layouts. Report a reproducible case when a supported card stops working.
-- Support is scoped to desktop `youtube.com` and `www.youtube.com` over HTTPS. Mobile YouTube, Music, Studio, embedded players, and other subdomains are not filtered.
-- The browser's selected theme does not automatically change FreshView's theme; choose it in Options.
+Modern and legacy YouTube video cards are supported. **Playlist/course summaries, advertisements, and Shorts are excluded.**
 
-## Keyboard shortcuts
+### Keyboard shortcuts
 
-Configure shortcuts in your browser's extension-shortcut settings. Chromium exposes these at `chrome://extensions/shortcuts`; Firefox provides **Manage Extension Shortcuts** in the add-ons manager.
+Configure shortcuts in your browser's extension-shortcut settings: `chrome://extensions/shortcuts` in Chromium, or **Manage Extension Shortcuts** in Firefox's add-ons manager.
 
-- **Toggle Hide Videos** changes the global hiding preference.
-- **Toggle View Threshold** switches between the saved percentage and 100%.
+- **Toggle hiding watched videos** changes the global hiding preference.
+- **Toggle watch threshold** switches between the saved percentage and 100%.
 
-A locked page continues using its saved Hide Videos state, and excluded pages remain excluded, even when the global shortcut is used.
+Locked pages keep their saved hiding state, and excluded pages remain excluded.
 
-## Changes in 3.1.0
+## Languages and appearance
 
-- Restore hidden cards correctly after reordering, node reuse, navigation, and filter changes; preserve original display styles.
-- Detect modern recommendation cards and late progress/link changes without startup polling timers.
-- Process affected cards incrementally, avoid whole-document scans while filtering is off, and prevent visibility writes from causing observer loops.
-- Recognize page categories independently of query parameters while preserving existing bookmark keys.
-- Validate stored settings, share background constants/storage logic, and handle unsupported tabs safely.
-- Remove the broad `tabs` permission; restrict host access to supported desktop YouTube pages.
-- Add Firefox background support, keyboard-accessible controls, descriptive labels, and visible focus.
-- Commit threshold-slider changes when an interaction finishes rather than writing storage on every movement.
-- Validate runtime resources and include local fonts in generated packages.
+| Language | Native name |
+| --- | --- |
+| English | English |
+| Spanish | Español |
+| Brazilian Portuguese | Português (Brasil) |
+| Japanese | 日本語 |
+| Simplified Chinese | 简体中文 |
+| Traditional Chinese | 繁體中文 |
+
+The extension automatically follows the browser's **interface language**, with English as the fallback. Selection is local and independent of your location or YouTube's language setting. Some browser language changes require a browser restart.
+
+Choose **System**, **Light**, or **Dark** in Settings. System follows the device's appearance and is the default for new installations; explicit light/dark preferences from older versions are preserved. Controls have visible keyboard focus and respect reduced-motion preferences.
+
+## What's new in 3.2.0
+
+- **Six-language interface:** popup, settings, status messages, accessibility labels, extension description, and shortcut descriptions.
+- **Clearer controls:** clickable labels, explanations of the watched percentage, and distinct lock/unlock icons and text.
+- **Flexible appearance:** responsive settings and System/Light/Dark themes with existing preferences preserved.
+- **Better keyboard behavior:** page locks retain focus, and disabling the threshold does not erase its saved percentage.
+- **Lighter UI work:** no slider layout measurements or icon-font usage; locale files are validated during packaging.
+
+<details>
+<summary>Previous release: 3.1.0</summary>
+
+- Fixed restoration after card reordering, reuse, navigation, and filter changes.
+- Added modern recommendations and detection of late progress/link updates.
+- Replaced startup polling with incremental mutation processing; avoided unrelated scans and observer loops.
+- Improved page classification, stored-setting validation, shared background logic, and unsupported-tab handling.
+- Removed broad `tabs` access and restricted hosts to desktop YouTube.
+- Added Firefox background support, keyboard-accessible controls, and validated runtime packaging.
+
+See the [original audit](docs/extension-audit-2026-09-27.md) and [3.1.0 verification](docs/verification-2026-09-27.md).
+
+</details>
 
 ## Privacy and permissions
 
-FreshView stores preferences and per-page locks in `chrome.storage.local`. Page locks contain the pathname and query string of pages you explicitly lock. Nothing is synchronized to a server by this extension.
+| Permission | Purpose |
+| --- | --- |
+| **Storage** | Save preferences and page locks on this device using `chrome.storage.local`. |
+| **Desktop YouTube host access** | Inspect video cards, hide/restore them, and read the supported active tab URL for page locks and popup state. |
 
-- **Storage:** save preferences on this device.
-- **Host access to desktop YouTube:** inspect video cards, hide/restore them, and read the supported active tab's URL for page locks and popup state.
+Page locks store the pathname and query string of pages you explicitly lock. Nothing is synchronized to a server. The extension does not request browsing-history access or metadata for all tabs. Scripts, fonts, and images are packaged locally; diagnostic output reports counts and operational errors rather than video titles or account history.
 
-The extension does not request access to browsing history or metadata for all tabs. Scripts, fonts, and images are packaged locally. Debug output reports counts and operational errors, not video titles or account history.
+## Known limitations
 
-## Development and validation
+- A video needs a usable progress indicator in YouTube's page markup to be filtered. A watched video without one stays visible.
+- YouTube can change its markup or serve different layouts. Please report reproducible failures.
+- Only HTTPS desktop `youtube.com` and `www.youtube.com` are supported. Mobile YouTube, Music, Studio, embedded players, and other subdomains are not filtered.
+- Filtering tests use controlled fixtures; authenticated account-specific watch-progress layouts remain unverified. Translations have not received independent native-speaker review.
 
-The project uses vanilla JavaScript, HTML, and CSS. See [AGENTS.md](AGENTS.md) for architecture and working conventions.
+## Development
+
+FreshView uses vanilla JavaScript, HTML, and CSS, with a Chromium service worker and Firefox background scripts. Read [AGENTS.md](AGENTS.md) for architecture and working conventions.
+
+### Validate
 
 ```sh
 for file in js/*.js; do node --check "$file" || exit 1; done
 python3 scripts/package.py --check
+git -c core.whitespace=cr-at-eol diff --check
 ```
 
-These checks validate syntax and resource references; they do not replace browser behavior testing. Before shipping, verify hide/restore, thresholds, all page/type filters, bookmarks, SPA navigation, infinite scrolling, duplicate/reused cards, keyboard access, and unsupported tabs with an installed extension. Check both Chromium and Firefox separately. Local development checks may live in the ignored `private/` directory.
+The **3.2.0** checks include **19 Chromium regression groups**, **42 UI/localization checks**, manual testing in **Firefox 156.0.1**, and Firefox package validation with **zero errors or warnings**. See the [verification report](docs/verification-3.2.0.md) for exact scope and limits.
 
-Version **3.1.0** passed 19 regression groups in Chrome for Testing 153 and 14 in the installed **Firefox 156.0.1** on macOS. Firefox filtering checks used synthetic DOM fixtures with unchanged packaged runtime scripts and real browser storage/messaging in a temporary test extension. The submitted Firefox package also passed a manual popup check on live, signed-out YouTube and an options/theme-persistence check. Authenticated YouTube layouts and account watch-progress data remain unverified. See the [verification report](docs/verification-2026-09-27.md) for scope and limitations.
+Syntax and package checks do not replace browser testing. Verify hide/restore, thresholds, filters, locks, navigation, dynamic/reused cards, storage updates, and keyboard access. Inspect the **actual toolbar popup** in both browsers, including translated text and themes; a standalone tab does not reproduce Firefox popup sizing. Local scratch checks belong in ignored `private/`.
 
-### Package
+### Build packages
 
 ```sh
-python3 scripts/package.py
+# Chromium/shared package
+python3 scripts/package.py --output private/dist/FreshView.zip
+
+# Firefox-only manifest with the stable add-on identity
+python3 scripts/package.py \
+  --firefox-id "freshview@roniel-rhack.github.io" \
+  --output private/dist/FreshView-firefox.zip
 ```
 
-This creates `private/dist/FreshView.zip`, containing only runtime files and the license. The script validates manifest, script, HTML, CSS, image, and font references before packaging and again inside the generated archive. Use `--output PATH` to choose another destination.
+Archives contain runtime files and the license. Resource references, locale keys, substitutions, and Chinese aliases are validated before packaging and again inside the archive. README screenshots and development artifacts are excluded. Preserve the Firefox add-on ID for updates; distribution still requires Mozilla validation/signing.
 
-For Firefox, use the stable add-on ID from the manifest:
+GitHub Actions checks syntax, builds an archive, and uploads it as an artifact. **It does not publish to browser stores.**
 
-```sh
-python3 scripts/package.py --firefox-id "freshview@roniel-rhack.github.io" --output private/dist/FreshView-firefox.zip
-```
+<details>
+<summary>Maintain translations</summary>
 
-This generates a Firefox-only manifest without changing the source manifest. The package still needs Mozilla validation/signing before distribution.
+Catalogs live in `_locales/<locale>/messages.json`, with `en` as the default. Keep keys and placeholders identical. `zh_Hans` mirrors `zh_CN`, and `zh_Hant` mirrors `zh_TW`; `uiLanguage` identifies the translated content for screen readers, including fallback cases.
 
-GitHub Actions runs syntax checks, builds the same archive, and uploads it as an artifact. It does not publish to browser stores. The [September 2026 audit](docs/extension-audit-2026-09-27.md) records the original findings; the [implementation verification](docs/verification-2026-09-27.md) records subsequent fixes and testing limits.
+`js/i18n.js` applies text and attributes without interpreting translations as HTML. Never translate storage keys, selectors, or the FreshView brand. Store listing translations and screenshots are maintained separately in each developer dashboard.
 
-### Debugging
+</details>
 
-On a YouTube page, open DevTools and select **FreshView's content-script execution context** from the console context selector. The default page context cannot access the extension's isolated globals.
+<details>
+<summary>Enable diagnostic output</summary>
+
+On YouTube, open DevTools and select **FreshView's content-script execution context**. The default page context cannot access the extension's isolated globals.
 
 ```js
 window.FRESHVIEW_DEBUG = true;
 window.freshviewDebugDOM();
 ```
 
-Then navigate within YouTube or change a filter to see diagnostic counts. The flag lasts for the current document and resets on a full reload. Set it to `false` when finished. Storage and processing errors are reported without enabling debug mode.
+Navigate or change a filter to see diagnostic counts. The flag lasts for the current document and resets on a full reload. Set it to `false` when finished. Storage and processing errors are reported without enabling debug mode.
+
+</details>
 
 ## Support and contributing
 
-Use the [issue tracker](https://github.com/roniel-rhack/FreshView/issues) for bugs and suggestions. Include the browser and extension versions, affected page type, enabled filters, expected behavior, and a minimal reproduction. Avoid sharing private URLs, account information, or browsing history.
+[Report a bug or suggest an improvement](https://github.com/roniel-rhack/FreshView/issues). Include browser/extension versions, affected page type, enabled filters, expected behavior, and a minimal reproduction. Avoid sharing private URLs, account information, or browsing history.
 
-Pull requests are welcome. Keep fixes focused and describe the browser checks performed and any unverified cases.
+Pull requests are welcome. Keep changes focused and describe the browser checks performed and anything still unverified.
 
 ## License and credits
 
-Licensed under [GNU GPL v3.0](LICENSE). Original project by [Mandrenkov](https://github.com/Mandrenkov); this fork is maintained by [roniel-rhack](https://github.com/roniel-rhack).
+[GNU GPL v3.0](LICENSE). Original project by [Mandrenkov](https://github.com/Mandrenkov); maintained fork by [roniel-rhack](https://github.com/roniel-rhack).

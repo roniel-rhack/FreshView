@@ -22,18 +22,6 @@ class Checkbox extends Widget {
     save() { Storage.set({[this.storage_key]: this.element.checked}); }
 }
 
-class DarkModeCheckbox extends Checkbox {
-    constructor() { super("dark-mode-checkbox", DARK_MODE_CHECKBOX_STORAGE_KEY, DARK_MODE_CHECKBOX_DEFAULT_STATE); }
-    onLoad(values) {
-        super.onLoad(values);
-        setCSSTheme(values[DARK_MODE_CHECKBOX_STORAGE_KEY]);
-    }
-}
-
-function setCSSTheme(dark) {
-    document.documentElement.setAttribute("data-theme", dark ? "dark" : "light");
-}
-
 class HideVideosCheckbox extends Widget {
     constructor() {
         super("hide-videos-checkbox", Object.keys(SETTINGS_DEFAULT_STATE), HIDE_VIDEOS_CHECKBOX_DEFAULT_STATE);
@@ -44,9 +32,7 @@ class HideVideosCheckbox extends Widget {
 
     load() {
         const generation = ++this.generation;
-        this.element.disabled = true;
         const bookmark = document.getElementById("hide-videos-bookmark");
-        bookmark.disabled = true;
         Storage.get(SETTINGS_DEFAULT_STATE, values => {
             chrome.tabs.query({active: true, currentWindow: true}, tabs => {
                 const error = chrome.runtime.lastError;
@@ -54,7 +40,8 @@ class HideVideosCheckbox extends Widget {
                 const tab = tabs?.[0];
                 if (error || !Path.supported(tab?.url)) {
                     this.element.checked = false;
-                    this.status("Open a YouTube page to hide videos.");
+                    this.element.disabled = bookmark.disabled = true;
+                    this.status(I18n.message("openYoutube"));
                     return;
                 }
                 chrome.tabs.sendMessage(tab.id, {message: PAGE_FILTER_QUERY_MESSAGE}, ignored => {
@@ -62,7 +49,8 @@ class HideVideosCheckbox extends Widget {
                     if (generation !== this.generation) return;
                     if (error || typeof ignored !== "boolean") {
                         this.element.checked = false;
-                        this.status("Refresh this YouTube page to connect FreshView.");
+                        this.element.disabled = bookmark.disabled = true;
+                        this.status(I18n.message("refreshYoutube"));
                         return;
                     }
                     const page = Path.parse(tab.url);
@@ -71,7 +59,7 @@ class HideVideosCheckbox extends Widget {
                     this.element.checked = !ignored && (locked ? bookmarks[page] : values[HIDE_VIDEOS_CHECKBOX_STORAGE_KEY]);
                     this.element.disabled = ignored || locked;
                     bookmark.disabled = false;
-                    this.status(ignored ? "Filtering is disabled for this page in Options." : locked ? "Unlock this page to change Hide Videos." : "");
+                    this.status(ignored ? I18n.message("excludedPage") : locked ? I18n.message(bookmarks[page] ? "lockedOn" : "lockedOff") : "");
                 });
             });
         });
@@ -96,7 +84,10 @@ class HideVideosBookmark extends Widget {
     }
     load() {
         Storage.get({[HIDE_VIDEOS_BOOKMARKS_STORAGE_KEY]: this.fallback}, values => {
-            Path.get(page => { this.element.checked = page !== undefined && Object.hasOwn(values[HIDE_VIDEOS_BOOKMARKS_STORAGE_KEY], page); });
+            Path.get(page => {
+                this.element.checked = page !== undefined && Object.hasOwn(values[HIDE_VIDEOS_BOOKMARKS_STORAGE_KEY], page);
+                document.getElementById("lock-label").textContent = I18n.message(this.element.checked ? "unlockPage" : "lockPage");
+            });
         });
     }
     save() {
@@ -132,19 +123,19 @@ class ViewThresholdSlider extends Widget {
             [VIEW_THRESHOLD_CHECKBOX_STORAGE_KEY]: VIEW_THRESHOLD_CHECKBOX_DEFAULT_STATE,
             [VIEW_THRESHOLD_SLIDER_STORAGE_KEY]: this.fallback
         }, values => {
-            this.element.value = values[VIEW_THRESHOLD_SLIDER_STORAGE_KEY];
             this.element.disabled = !values[VIEW_THRESHOLD_CHECKBOX_STORAGE_KEY];
+            this.element.value = this.element.disabled ? 100 : values[VIEW_THRESHOLD_SLIDER_STORAGE_KEY];
             this.render();
         });
     }
     render() {
-        const width = this.element.clientWidth;
-        const thumb = Number.parseInt(getComputedStyle(document.documentElement).getPropertyValue("--thumb-size"), 10);
-        document.documentElement.style.setProperty("--thumb-translation", `${Math.ceil((1 - (this.element.value - 1) / 99) * (width - thumb))}px`);
-        const label = document.getElementById("view-threshold-percent");
-        const value = this.element.disabled ? 100 : this.element.value;
-        label.textContent = `${value}%`;
-        this.element.setAttribute("aria-valuetext", `${value}% watched`);
+        const value = this.element.disabled ? 100 : Number(this.element.value);
+        const percent = I18n.percent(value);
+        document.getElementById("view-threshold-percent").textContent = percent;
+        document.getElementById("threshold-help").textContent = this.element.disabled
+            ? I18n.message("thresholdOff") : I18n.message("thresholdSummary", percent);
+        this.element.setAttribute("aria-valuetext", I18n.message("thresholdAria", I18n.percent(this.element.value)));
     }
+
     save() { Storage.set({[VIEW_THRESHOLD_SLIDER_STORAGE_KEY]: Number(this.element.value)}); }
 }

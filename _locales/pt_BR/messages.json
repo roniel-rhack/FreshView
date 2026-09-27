@@ -1,0 +1,218 @@
+{
+  "extensionDescription": {
+    "message": "Oculte vídeos do YouTube™ já assistidos e descubra novos conteúdos.",
+    "description": "Hide watched YouTube™ videos and discover fresh content."
+  },
+  "commandHide": {
+    "message": "Ativar ou desativar a ocultação de vídeos assistidos",
+    "description": "Toggle hiding watched videos"
+  },
+  "commandThreshold": {
+    "message": "Ativar ou desativar a porcentagem mínima assistida",
+    "description": "Toggle watch threshold"
+  },
+  "optionsTitle": {
+    "message": "Configurações do FreshView",
+    "description": "FreshView settings"
+  },
+  "preferences": {
+    "message": "Configurações",
+    "description": "Settings"
+  },
+  "appearance": {
+    "message": "Aparência",
+    "description": "Appearance"
+  },
+  "appearanceHelp": {
+    "message": "Deixe o FreshView com a cara do seu navegador.",
+    "description": "Make FreshView feel at home in your browser."
+  },
+  "languageNote": {
+    "message": "O idioma acompanha automaticamente o do navegador.",
+    "description": "Language follows your browser automatically."
+  },
+  "theme": {
+    "message": "Tema",
+    "description": "Theme"
+  },
+  "themeHelp": {
+    "message": "Sistema acompanha a aparência clara ou escura do dispositivo.",
+    "description": "System follows your device’s light or dark appearance."
+  },
+  "themeSystem": {
+    "message": "Sistema",
+    "description": "System"
+  },
+  "themeLight": {
+    "message": "Claro",
+    "description": "Light"
+  },
+  "themeDark": {
+    "message": "Escuro",
+    "description": "Dark"
+  },
+  "filters": {
+    "message": "Filtros",
+    "description": "Filters"
+  },
+  "filtersHelp": {
+    "message": "Escolha onde ocultar vídeos assistidos. Estes filtros se aplicam quando a ocultação está ativada.",
+    "description": "Choose where to hide watched videos. These filters apply when hiding is enabled."
+  },
+  "types": {
+    "message": "Tipos de vídeo",
+    "description": "Video types"
+  },
+  "pages": {
+    "message": "Páginas do YouTube",
+    "description": "YouTube pages"
+  },
+  "hideTitle": {
+    "message": "Ocultar vídeos assistidos",
+    "description": "Hide watched videos"
+  },
+  "hideHelp": {
+    "message": "Mantenha à vista os vídeos que ainda não assistiu.",
+    "description": "Keep unwatched videos in view."
+  },
+  "thresholdTitle": {
+    "message": "Porcentagem mínima assistida",
+    "description": "Minimum watched"
+  },
+  "thresholdSummary": {
+    "message": "Ocultar vídeos com pelo menos $PERCENT$ assistido.",
+    "placeholders": {
+      "percent": {
+        "content": "$1",
+        "example": "90%"
+      }
+    },
+    "description": "Hide videos watched at least $PERCENT$."
+  },
+  "thresholdOff": {
+    "message": "Somente vídeos totalmente assistidos (100%) são ocultados.",
+    "description": "Only fully watched videos (100%) are hidden."
+  },
+  "thresholdAria": {
+    "message": "$PERCENT$ assistido",
+    "placeholders": {
+      "percent": {
+        "content": "$1",
+        "example": "90%"
+      }
+    },
+    "description": "$PERCENT$ watched"
+  },
+  "lockPage": {
+    "message": "Fixar configuração nesta página",
+    "description": "Lock setting on this page"
+  },
+  "unlockPage": {
+    "message": "Desbloquear esta página",
+    "description": "Unlock this page"
+  },
+  "lockHelp": {
+    "message": "Salve a configuração atual de ocultação para esta página específica.",
+    "description": "Save the current hiding setting for this exact page."
+  },
+  "lockedOn": {
+    "message": "A ocultação está fixada como ativa nesta página. Desbloqueie para alterar.",
+    "description": "Hiding is locked on for this page. Unlock to change it."
+  },
+  "lockedOff": {
+    "message": "A ocultação está fixada como inativa nesta página. Desbloqueie para alterar.",
+    "description": "Hiding is locked off for this page. Unlock to change it."
+  },
+  "openYoutube": {
+    "message": "Abra uma página do YouTube para ocultar vídeos.",
+    "description": "Open a YouTube page to hide videos."
+  },
+  "refreshYoutube": {
+    "message": "Recarregue esta página do YouTube para conectar o FreshView.",
+    "description": "Refresh this YouTube page to connect FreshView."
+  },
+  "excludedPage": {
+    "message": "A filtragem desta página está desativada nas Configurações.",
+    "description": "Filtering is disabled for this page in Settings."
+  },
+  "recommendations": {
+    "message": "Recomendações",
+    "description": "Recommendations"
+  },
+  "recommendationsHelp": {
+    "message": "Vídeos recomendados ao lado do player.",
+    "description": "Videos recommended beside the player."
+  },
+  "playlists": {
+    "message": "Vídeos de playlists",
+    "description": "Playlist videos"
+  },
+  "playlistsHelp": {
+    "message": "Vídeos individuais de uma playlist, não a playlist em si.",
+    "description": "Individual videos inside a playlist, not the playlist itself."
+  },
+  "searches": {
+    "message": "Resultados de pesquisa",
+    "description": "Search results"
+  },
+  "searchesHelp": {
+    "message": "Vídeos exibidos ao pesquisar no YouTube.",
+    "description": "Videos shown when you search YouTube."
+  },
+  "channels": {
+    "message": "Canais",
+    "description": "Channels"
+  },
+  "channelsHelp": {
+    "message": "Vídeos na página de um canal.",
+    "description": "Videos on a channel’s page."
+  },
+  "home": {
+    "message": "Início",
+    "description": "Home"
+  },
+  "homeHelp": {
+    "message": "Vídeos na sua página inicial do YouTube.",
+    "description": "Videos on your YouTube home page."
+  },
+  "explore": {
+    "message": "Explorar",
+    "description": "Explore"
+  },
+  "exploreHelp": {
+    "message": "Vídeos nas páginas Explorar e Em alta.",
+    "description": "Videos on Explore and Trending pages."
+  },
+  "subscriptions": {
+    "message": "Inscrições",
+    "description": "Subscriptions"
+  },
+  "subscriptionsHelp": {
+    "message": "Vídeos dos canais em que você se inscreveu.",
+    "description": "Videos from channels you subscribe to."
+  },
+  "library": {
+    "message": "Você / Biblioteca",
+    "description": "You / Library"
+  },
+  "libraryHelp": {
+    "message": "Vídeos na sua área pessoal do YouTube.",
+    "description": "Videos in your personal YouTube area."
+  },
+  "history": {
+    "message": "Histórico",
+    "description": "History"
+  },
+  "historyHelp": {
+    "message": "Desativado por padrão para você encontrar vídeos já assistidos.",
+    "description": "Off by default so you can find videos you watched before."
+  },
+  "uiLanguage": {
+    "message": "pt-BR",
+    "description": "BCP 47 language of this translation, used by screen readers."
+  },
+  "uiDirection": {
+    "message": "ltr",
+    "description": "Reading direction of this translation."
+  }
+}

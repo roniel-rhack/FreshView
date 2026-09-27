@@ -2,8 +2,8 @@
     "manifest_version": 3,
     "name": "FreshView for YouTube™",
     "short_name": "FreshView for YouTube™",
-    "description": "Hide YouTube™ videos you've already watched to easily discover fresh content.",
-    "version": "3.1.0",
+    "description": "__MSG_extensionDescription__",
+    "version": "3.2.0",
     "background": {
         "service_worker": "js/service-worker.js",
         "scripts": [
@@ -16,10 +16,10 @@
     },
     "commands": {
         "toggle-hide-videos-checkbox": {
-            "description": "Toggle \"Hide Videos\""
+            "description": "__MSG_commandHide__"
         },
         "toggle-view-threshold-checkbox": {
-            "description": "Toggle \"View Threshold\""
+            "description": "__MSG_commandThreshold__"
         }
     },
     "content_scripts": [
@@ -83,5 +83,6 @@
                 ]
             }
         }
-    }
+    },
+    "default_locale": "en"
 }

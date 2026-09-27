@@ -2,70 +2,36 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>FreshView</title>
-        <link rel="stylesheet" type="text/css" href="../css/fonts.css">
-        <link rel="stylesheet" type="text/css" href="../css/popup.css">
-        <script src="../js/constants.js"></script>
-        <script src="../js/logger.js"></script>
-        <script src="../js/path.js"></script>
-        <script src="../js/storage.js"></script>
-        <script src="../js/widget.js"></script>
-        <script src="../js/popup.js"></script>
+        <link rel="stylesheet" href="../css/fonts.css">
+        <link rel="stylesheet" href="../css/popup.css">
+        <script src="../js/constants.js" defer></script>
+        <script src="../js/logger.js" defer></script>
+        <script src="../js/path.js" defer></script>
+        <script src="../js/storage.js" defer></script>
+        <script src="../js/i18n.js" defer></script>
+        <script src="../js/theme.js" defer></script>
+        <script src="../js/widget.js" defer></script>
+        <script src="../js/popup.js" defer></script>
     </head>
     <body>
-        <div id="header">
-            <img id="logo" src="../img/icon.png" alt="FreshView logo"/>
-            <span id="title">FreshView</span>
-            <div id="actions">
-                <div class="action">
-                    <button id="options-span" type="button" class="material-icons" aria-label="Options">tune</button>
-                    <span id="options-tooltip" class="tooltip">Options</span>
-                </div>
-            </div>
-        </div>
-        <p id="page-status" role="status" hidden></p>
-        <div id="controls">
-            <!-- "Hide Videos" controls -->
-            <div class="control">
-                <div class="control-margin">
-                    <div class="toggle">
-                        <input id="hide-videos-checkbox" disabled aria-label="Hide watched videos" type="checkbox"/>
-                        <label class="toggle" for="hide-videos-checkbox"></label>
-                    </div>
-                </div>
-                <div class="control-panel">
-                    <div class="control-split">
-                        <div class="control-description">
-                            <div class="control-name">Hide Videos</div>
-                            <div class="control-help">Toggles the visibility of watched videos.</div>
-                        </div>
-                        <div class="control-bookmark">
-                            <input type="checkbox" id="hide-videos-bookmark" disabled aria-label="Lock Hide Videos on this page">
-                            <label class="material-icons" for="hide-videos-bookmark">vpn_lock</label>
-                            <span id="hide-videos-tooltip" class="tooltip">Lock the Hide Videos toggle on this page.</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- "View Threshold" controls -->
-            <div class="control">
-                <div class="control-margin">
-                    <div class="toggle">
-                        <input id="view-threshold-checkbox" aria-label="Enable view threshold" type="checkbox">
-                        <label class="toggle" for="view-threshold-checkbox"></label>
-                    </div>
-                </div>
-                <div class="control-panel">
-                    <div class="control-description">
-                        <div class="control-name">View Threshold</div>
-                        <div class="control-help">Adjusts the viewing threshold of watched videos.</div>
-                    </div>
-                    <div class="control-slider">
-                        <input id="view-threshold-slider" aria-label="Minimum watched percentage" class="control-slider" type="range" min="1" max="100" step="1" value="90">
-                        <label id="view-threshold-percent" class="control-slider" for="view-threshold-slider">100%</label>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <header class="header"><div class="brand"><img src="../img/icon32.png" width="28" height="28" alt=""><h1 translate="no">FreshView</h1></div><button id="options-span" type="button" class="icon-button" data-i18n-aria="preferences" data-i18n-title="preferences" aria-label="Settings" title="Settings"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 7h16M4 17h16M8 4v6M16 14v6"/></svg></button></header>
+        <main>
+            <p id="page-status" role="status" hidden></p>
+            <section class="settings-card" aria-labelledby="hide-heading">
+                <label class="setting-row" for="hide-videos-checkbox">
+                    <span class="setting-copy"><span data-i18n="hideTitle" class="setting-title" id="hide-heading">Hide watched videos</span><span data-i18n="hideHelp" class="setting-help" id="hide-videos-checkbox-help">Keep unwatched videos in view.</span></span>
+                    <span class="switch"><input id="hide-videos-checkbox" aria-labelledby="hide-heading" type="checkbox" disabled aria-describedby="hide-videos-checkbox-help"><span class="switch-track" aria-hidden="true"></span></span>
+                </label>
+                <div class="lock-row"><label class="page-lock"><input id="hide-videos-bookmark" type="checkbox" disabled aria-describedby="lock-help"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="2"/><path class="lock-closed" d="M8 10V7a4 4 0 0 1 8 0v3"/><path class="lock-open" d="M8 10V7a4 4 0 0 1 8 0"/></svg><span id="lock-label" data-i18n="lockPage">Lock setting on this page</span></label>
+                <p data-i18n="lockHelp" id="lock-help" class="setting-help">Save the current hiding setting for this exact page.</p></div>
+            </section>
+            <section class="settings-card threshold-card" aria-labelledby="threshold-heading">
+                <label class="setting-row" for="view-threshold-checkbox"><span class="setting-title" id="threshold-heading" data-i18n="thresholdTitle">Minimum watched</span><span class="switch"><input id="view-threshold-checkbox" type="checkbox" aria-describedby="threshold-help"><span class="switch-track" aria-hidden="true"></span></span></label>
+                <div class="slider-row"><input id="view-threshold-slider" type="range" min="1" max="100" step="1" value="90" aria-labelledby="threshold-heading" aria-describedby="threshold-help"><output id="view-threshold-percent" for="view-threshold-slider">90%</output></div>
+                <p id="threshold-help" class="setting-help"></p>
+            </section>
+        </main>
     </body>
 </html>

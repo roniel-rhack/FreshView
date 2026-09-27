@@ -8,11 +8,46 @@ from pathlib import Path
 from zipfile import ZIP_DEFLATED, ZipFile
 
 ROOT = Path(__file__).resolve().parents[1]
-DIRECTORIES = ("css", "fonts", "html", "img", "js")
+DIRECTORIES = ("css", "fonts", "html", "img", "js", "_locales")
+
+
+def validate_locales(files, manifest):
+    default_path = f"_locales/{manifest['default_locale']}/messages.json"
+    if default_path not in files:
+        raise ValueError("Missing default locale: " + default_path)
+    catalogs = {name: json.loads(data) for name, data in files.items()
+                if name.startswith("_locales/") and name.endswith("/messages.json")}
+    default = catalogs[default_path]
+    for name, catalog in catalogs.items():
+        if catalog.keys() != default.keys():
+            raise ValueError("Locale message keys differ: " + name)
+        for key, entry in catalog.items():
+            if not isinstance(entry.get("message"), str) or not entry["message"].strip():
+                raise ValueError(f"Empty locale message: {name}:{key}")
+            placeholders = entry.get("placeholders", {})
+            expected = default[key].get("placeholders", {})
+            if placeholders != expected:
+                raise ValueError(f"Locale placeholders differ: {name}:{key}")
+            tokens = {token.lower() for token in re.findall(r"\$([a-zA-Z_]+)\$", entry["message"])}
+            if tokens != set(placeholders):
+                raise ValueError(f"Invalid locale placeholder tokens: {name}:{key}")
+    for source, data in files.items():
+        if source.endswith((".html", ".js")) or source == "manifest.json":
+            content = data.decode()
+            keys = re.findall(r"__MSG_(\w+)__", content)
+            keys += re.findall(r'data-i18n(?:-aria|-title)?="([\w]+)"', content)
+            keys += re.findall(r'I18n\.message\("([\w]+)"', content)
+            missing = set(keys) - default.keys()
+            if missing:
+                raise ValueError(f"Unknown locale messages in {source}: {sorted(missing)}")
+    for canonical, alias in [("zh_CN", "zh_Hans"), ("zh_TW", "zh_Hant")]:
+        if catalogs.get(f"_locales/{canonical}/messages.json") != catalogs.get(f"_locales/{alias}/messages.json"):
+            raise ValueError(f"Chinese locale alias differs: {canonical}/{alias}")
 
 
 def validate(files):
     manifest = json.loads(files["manifest.json"])
+    validate_locales(files, manifest)
     references = list(manifest["icons"].values())
     references += list(manifest["action"]["default_icon"].values())
     references += [manifest["action"]["default_popup"], manifest["options_ui"]["page"]]

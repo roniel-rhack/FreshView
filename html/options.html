@@ -2,174 +2,70 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>FreshView Options</title>
-        <!-- Style Sheets -->
-        <link rel="stylesheet" type="text/css" href="../css/fonts.css">
-        <link rel="stylesheet" type="text/css" href="../css/options.css">
-        <!-- JavaScript Files -->
-        <script src="../js/constants.js"></script>
-        <script src="../js/logger.js"></script>
-        <script src="../js/storage.js"></script>
-        <script src="../js/widget.js"></script>
-        <script src="../js/options.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title data-i18n="optionsTitle">FreshView settings</title>
+        <link rel="stylesheet" href="../css/fonts.css">
+        <link rel="stylesheet" href="../css/options.css">
+        <script src="../js/constants.js" defer></script>
+        <script src="../js/logger.js" defer></script>
+        <script src="../js/path.js" defer></script>
+        <script src="../js/storage.js" defer></script>
+        <script src="../js/i18n.js" defer></script>
+        <script src="../js/theme.js" defer></script>
+        <script src="../js/widget.js" defer></script>
+        <script src="../js/options.js" defer></script>
     </head>
     <body>
-        <div class="header">
-            <div class="header-title">FreshView for YouTube™</div>
-            <img class="header-logo" src="../img/icon.png" alt="FreshView logo"/>
-            <div class="header-subtitle">Preferences</div>
-        </div>
-
-        <div class="header-section-break"></div>
-
-        <div class="section">
-            <div class="section-title">Appearance</div>
-            <div class="section-description">Customize the appearance of the extension.</div>
-            <div class="section-group">
-                <div class="section-group-left">Theme</div>
-                <div class="section-group-right">
-                    <div class="section-option">
-                        <div class="section-option-left toggle">
-                            <input id="dark-mode-checkbox" aria-label="Dark Mode" type="checkbox"/>
-                            <label class="toggle" for="dark-mode-checkbox"></label>
-                        </div>
-                        <div class="section-option-right">
-                            <div class="section-option-title">Dark Mode</div>
-                            <div class="section-option-description">Use the dark theme.</div>
-                        </div>
-                    </div>
+        <header class="header"><div class="brand"><img src="../img/icon32.png" width="28" height="28" alt=""><span translate="no">FreshView <span class="brand-detail">for YouTube™</span></span></div><h1 data-i18n="preferences">Settings</h1></header>
+        <main class="settings">
+            <section aria-labelledby="appearance-heading">
+                <h2 data-i18n="appearance" id="appearance-heading">Appearance</h2>
+                <p data-i18n="appearanceHelp" class="section-help">Make FreshView feel at home in your browser.</p>
+                <div class="settings-card theme-row">
+                    <div class="setting-copy"><label data-i18n="theme" class="setting-title" for="theme-mode">Theme</label><p data-i18n="themeHelp" class="setting-help" id="theme-help">System follows your device’s light or dark appearance.</p></div>
+                    <select id="theme-mode" aria-describedby="theme-help"><option data-i18n="themeSystem" value="system">System</option><option data-i18n="themeLight" value="light">Light</option><option data-i18n="themeDark" value="dark">Dark</option></select>
                 </div>
-            </div>
-        </div>
-
-        <div class="divider"></div>
-
-        <div class="section">
-            <div class="section-title">Filters</div>
-            <div class="section-description">
-                Choose which videos should be hidden by the extension when the
-                Hide Videos toggle is activated.
-            </div>
-
-            <div class="section-group">
-                <div class="section-group-left">Types</div>
-                <div class="section-group-right">
-                    <div class="section-option">
-                        <div class="section-option-left toggle">
-                            <input id="hide-recommendations-checkbox" aria-label="Filter recommendations" type="checkbox"/>
-                            <label class="toggle" for="hide-recommendations-checkbox"></label>
-                        </div>
-                        <div class="section-option-right">
-                            <div class="section-option-title">Recommendations</div>
-                            <div class="section-option-description">
-                                Hide watched videos in the recommendations sidebar.
-                            </div>
-                        </div>
-                    </div>
-                    <div class="section-option">
-                        <div class="section-option-left toggle">
-                            <input id="hide-playlists-checkbox" aria-label="Filter playlist videos" type="checkbox"/>
-                            <label class="toggle" for="hide-playlists-checkbox"></label>
-                        </div>
-                        <div class="section-option-right">
-                            <div class="section-option-title">Playlists</div>
-                            <div class="section-option-description">
-                                Hide watched videos in playlists.
-                            </div>
-                        </div>
-                    </div>
-                    <div class="section-option">
-                        <div class="section-option-left toggle">
-                            <input id="hide-searches-checkbox" aria-label="Filter search results" type="checkbox"/>
-                            <label class="toggle" for="hide-searches-checkbox"></label>
-                        </div>
-                        <div class="section-option-right">
-                            <div class="section-option-title">Searches</div>
-                            <div class="section-option-description">
-                                Hide watched videos in search results.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="section-group">
-                <div class="section-group-left">Pages</div>
-                <div class="section-group-right">
-                    <div class="section-option">
-                        <div class="section-option-left toggle">
-                            <input id="hide-channels-checkbox" aria-label="Filter channels" type="checkbox"/>
-                            <label class="toggle" for="hide-channels-checkbox"></label>
-                        </div>
-                        <div class="section-option-right">
-                            <div class="section-option-title">Channels</div>
-                            <div class="section-option-description">
-                                Hide watched videos on channel pages.
-                            </div>
-                        </div>
-                    </div>
-                    <div class="section-option">
-                        <div class="section-option-left toggle">
-                            <input id="hide-home-checkbox" aria-label="Filter Home" type="checkbox"/>
-                            <label class="toggle" for="hide-home-checkbox"></label>
-                        </div>
-                        <div class="section-option-right">
-                            <div class="section-option-title">Home</div>
-                            <div class="section-option-description">
-                                Hide watched videos in the <a target="_blank" href="https://www.youtube.com">Home</a> tab.
-                            </div>
-                        </div>
-                    </div>
-                    <div class="section-option">
-                        <div class="section-option-left toggle">
-                            <input id="hide-explore-checkbox" aria-label="Filter Explore" type="checkbox"/>
-                            <label class="toggle" for="hide-explore-checkbox"></label>
-                        </div>
-                        <div class="section-option-right">
-                            <div class="section-option-title">Explore</div>
-                            <div class="section-option-description">
-                                Hide watched videos in the <a target="_blank" href="https://www.youtube.com/feed/explore">Explore</a> tab.
-                            </div>
-                        </div>
-                    </div>
-                    <div class="section-option">
-                        <div class="section-option-left toggle">
-                            <input id="hide-subscriptions-checkbox" aria-label="Filter Subscriptions" type="checkbox"/>
-                            <label class="toggle" for="hide-subscriptions-checkbox"></label>
-                        </div>
-                        <div class="section-option-right">
-                            <div class="section-option-title">Subscriptions</div>
-                            <div class="section-option-description">
-                                Hide watched videos in the <a target="_blank" href="https://www.youtube.com/feed/subscriptions">Subscriptions</a> tab.
-                            </div>
-                        </div>
-                    </div>
-                    <div class="section-option">
-                        <div class="section-option-left toggle">
-                            <input id="hide-library-checkbox" aria-label="Filter You and Library" type="checkbox"/>
-                            <label class="toggle" for="hide-library-checkbox"></label>
-                        </div>
-                        <div class="section-option-right">
-                            <div class="section-option-title">You / Library</div>
-                            <div class="section-option-description">
-                                Hide watched videos in the <a target="_blank" href="https://www.youtube.com/feed/you">You</a> tab.
-                            </div>
-                        </div>
-                    </div>
-                    <div class="section-option">
-                        <div class="section-option-left toggle">
-                            <input id="hide-history-checkbox" aria-label="Filter History" type="checkbox"/>
-                            <label class="toggle" for="hide-history-checkbox"></label>
-                        </div>
-                        <div class="section-option-right">
-                            <div class="section-option-title">History</div>
-                            <div class="section-option-description">
-                                Hide watched videos in the <a target="_blank" href="https://www.youtube.com/feed/history">History</a> tab.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </body>
-</html>
+                <p data-i18n="languageNote" class="language-note">Language follows your browser automatically.</p>
+            </section>
+            <section aria-labelledby="filters-heading">
+                <h2 data-i18n="filters" id="filters-heading">Filters</h2>
+                <p data-i18n="filtersHelp" class="section-help">Choose where to hide watched videos. These filters apply when hiding is enabled.</p>
+<h3 data-i18n="types">Video types</h3><div class="settings-card">
+<label class="setting-row" for="hide-recommendations-checkbox">
+                    <span class="setting-copy"><span data-i18n="recommendations" class="setting-title" id="hide-recommendations-checkbox-title">Recommendations</span><span data-i18n="recommendationsHelp" class="setting-help" id="hide-recommendations-checkbox-help">Videos recommended beside the player.</span></span>
+                    <span class="switch"><input id="hide-recommendations-checkbox" aria-labelledby="hide-recommendations-checkbox-title" type="checkbox" aria-describedby="hide-recommendations-checkbox-help"><span class="switch-track" aria-hidden="true"></span></span>
+                </label>
+<label class="setting-row" for="hide-playlists-checkbox">
+                    <span class="setting-copy"><span data-i18n="playlists" class="setting-title" id="hide-playlists-checkbox-title">Playlist videos</span><span data-i18n="playlistsHelp" class="setting-help" id="hide-playlists-checkbox-help">Individual videos inside a playlist, not the playlist itself.</span></span>
+                    <span class="switch"><input id="hide-playlists-checkbox" aria-labelledby="hide-playlists-checkbox-title" type="checkbox" aria-describedby="hide-playlists-checkbox-help"><span class="switch-track" aria-hidden="true"></span></span>
+                </label>
+<label class="setting-row" for="hide-searches-checkbox">
+                    <span class="setting-copy"><span data-i18n="searches" class="setting-title" id="hide-searches-checkbox-title">Search results</span><span data-i18n="searchesHelp" class="setting-help" id="hide-searches-checkbox-help">Videos shown when you search YouTube.</span></span>
+                    <span class="switch"><input id="hide-searches-checkbox" aria-labelledby="hide-searches-checkbox-title" type="checkbox" aria-describedby="hide-searches-checkbox-help"><span class="switch-track" aria-hidden="true"></span></span>
+                </label></div>
+<h3 data-i18n="pages">YouTube pages</h3><div class="settings-card">
+<label class="setting-row" for="hide-channels-checkbox">
+                    <span class="setting-copy"><span data-i18n="channels" class="setting-title" id="hide-channels-checkbox-title">Channels</span><span data-i18n="channelsHelp" class="setting-help" id="hide-channels-checkbox-help">Videos on a channel’s page.</span></span>
+                    <span class="switch"><input id="hide-channels-checkbox" aria-labelledby="hide-channels-checkbox-title" type="checkbox" aria-describedby="hide-channels-checkbox-help"><span class="switch-track" aria-hidden="true"></span></span>
+                </label>
+<label class="setting-row" for="hide-home-checkbox">
+                    <span class="setting-copy"><span data-i18n="home" class="setting-title" id="hide-home-checkbox-title">Home</span><span data-i18n="homeHelp" class="setting-help" id="hide-home-checkbox-help">Videos on your YouTube home page.</span></span>
+                    <span class="switch"><input id="hide-home-checkbox" aria-labelledby="hide-home-checkbox-title" type="checkbox" aria-describedby="hide-home-checkbox-help"><span class="switch-track" aria-hidden="true"></span></span>
+                </label>
+<label class="setting-row" for="hide-explore-checkbox">
+                    <span class="setting-copy"><span data-i18n="explore" class="setting-title" id="hide-explore-checkbox-title">Explore</span><span data-i18n="exploreHelp" class="setting-help" id="hide-explore-checkbox-help">Videos on Explore and Trending pages.</span></span>
+                    <span class="switch"><input id="hide-explore-checkbox" aria-labelledby="hide-explore-checkbox-title" type="checkbox" aria-describedby="hide-explore-checkbox-help"><span class="switch-track" aria-hidden="true"></span></span>
+                </label>
+<label class="setting-row" for="hide-subscriptions-checkbox">
+                    <span class="setting-copy"><span data-i18n="subscriptions" class="setting-title" id="hide-subscriptions-checkbox-title">Subscriptions</span><span data-i18n="subscriptionsHelp" class="setting-help" id="hide-subscriptions-checkbox-help">Videos from channels you subscribe to.</span></span>
+                    <span class="switch"><input id="hide-subscriptions-checkbox" aria-labelledby="hide-subscriptions-checkbox-title" type="checkbox" aria-describedby="hide-subscriptions-checkbox-help"><span class="switch-track" aria-hidden="true"></span></span>
+                </label>
+<label class="setting-row" for="hide-library-checkbox">
+                    <span class="setting-copy"><span data-i18n="library" class="setting-title" id="hide-library-checkbox-title">You / Library</span><span data-i18n="libraryHelp" class="setting-help" id="hide-library-checkbox-help">Videos in your personal YouTube area.</span></span>
+                    <span class="switch"><input id="hide-library-checkbox" aria-labelledby="hide-library-checkbox-title" type="checkbox" aria-describedby="hide-library-checkbox-help"><span class="switch-track" aria-hidden="true"></span></span>
+                </label>
+<label class="setting-row" for="hide-history-checkbox">
+                    <span class="setting-copy"><span data-i18n="history" class="setting-title" id="hide-history-checkbox-title">History</span><span data-i18n="historyHelp" class="setting-help" id="hide-history-checkbox-help">Off by default so you can find videos you watched before.</span></span>
+                    <span class="switch"><input id="hide-history-checkbox" aria-labelledby="hide-history-checkbox-title" type="checkbox" aria-describedby="hide-history-checkbox-help"><span class="switch-track" aria-hidden="true"></span></span>
+                </label></div>
+</section></main></body></html>

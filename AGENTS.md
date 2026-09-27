@@ -19,6 +19,8 @@ There is no package manifest, build step, dependency installation, or committed 
 - `js/settings.js`, `js/page.js`, and `js/path.js` apply thresholds, page/type filters, and per-page bookmarks. Bookmarks currently use pathname plus query string; changing normalization changes stored-key behavior.
 - `js/service-worker.js` handles keyboard commands and tab URL changes. It loads the shared constants, logger, storage, and path helpers through `importScripts` in Chromium; Firefox loads them in manifest order.
 - `html/popup.html` and `html/options.html` load their own scripts. `js/widget.js` implements shared controls; `js/popup.js` and `js/options.js` initialize them. HTML script ordering is independent from content-script ordering.
+- `js/i18n.js` localizes popup/options only. `_locales/` contains complete catalogs; keep Chinese regional/script aliases in sync and validate placeholders with the packager. Filtering must never depend on translated text.
+- `js/theme.js` owns System/Light/Dark appearance. The `theme-mode` preference takes precedence; absent it, preserve a boolean `dark-mode-checkbox-state`, otherwise follow the system.
 - `css/` and `fonts/` provide local styles and fonts. `scripts/package.py` defines and validates the distributable file list; `.github/workflows/package.yaml` runs it.
 
 # Behavior and performance safeguards
@@ -48,7 +50,7 @@ These checks do not prove browser functionality. For behavior changes, load the 
 - Home, search, channels, history, subscriptions, playlists, and recommendations, including disabled page/type filters.
 - Infinite scrolling, SPA navigation, duplicate videos, reordered/reused cards, and restoration of original display styles.
 - Popup, options, keyboard shortcuts, bookmarks, storage updates across tabs, and unsupported tabs.
-- Keyboard accessibility and both color themes when changing the UI.
+- Keyboard accessibility, System/Light/Dark appearance, legacy preference fallback, translated text, and narrow settings layouts when changing the UI. Inspect the actual toolbar popup in both browsers: a standalone tab cannot detect Firefox popup auto-sizing failures.
 
 Use disposable fixtures with synthetic video IDs and mocked browser storage for focused regression checks. Local scratch checks belong under the already ignored `private/` directory; do not add them to commits without an explicit request. Keep authenticated live-browser verification distinct from fixture-based checks.
 
