@@ -12,11 +12,14 @@ This is the maintained fork by [roniel-rhack](https://github.com/roniel-rhack) o
 
 ## Install
 
-**Chrome:** [Install FreshView from the Chrome Web Store](https://chromewebstore.google.com/detail/freshview-for-youtube/glologkcncopfogmaghfgcoloklmella).
+Store status last checked on **September 27, 2026**:
 
-Version **3.1.0** was submitted on September 27, 2026 and is **pending Chrome Web Store review**, with automatic publication after approval. The previously published version is **3.0.0**. The packaging workflow does not publish to stores.
+| Browser | Public release | Submitted release |
+| --- | --- | --- |
+| Chrome | **3.0.0** — [Install from the Chrome Web Store](https://chromewebstore.google.com/detail/freshview-for-youtube/glologkcncopfogmaghfgcoloklmella) | **3.1.0**, pending review; automatic publication after approval |
+| Firefox | This fork's first release is not yet publicly available | **3.1.0**, awaiting Mozilla review; [Add-ons listing](https://addons.mozilla.org/en-US/firefox/addon/freshview-youtube-roniel/) becomes available after approval |
 
-**Firefox:** version **3.1.0** was submitted as this fork's first Mozilla Add-ons release on September 27, 2026 and is **awaiting review**. Its [Mozilla Add-ons page](https://addons.mozilla.org/en-US/firefox/addon/freshview-youtube-roniel/) will become publicly available after approval. Other similarly named extensions belong to different maintainers.
+Both submissions were completed on September 27, 2026. Submission does not mean approval or public availability. Other similarly named Firefox extensions belong to different maintainers. The packaging workflow does not publish to stores.
 
 ### Load the development version
 
@@ -89,6 +92,8 @@ python3 scripts/package.py --check
 ```
 
 These checks validate syntax and resource references; they do not replace browser behavior testing. Before shipping, verify hide/restore, thresholds, all page/type filters, bookmarks, SPA navigation, infinite scrolling, duplicate/reused cards, keyboard access, and unsupported tabs with an installed extension. Check both Chromium and Firefox separately. Local development checks may live in the ignored `private/` directory.
+
+Version **3.1.0** passed 19 regression groups in Chrome for Testing 153 and 14 in the installed **Firefox 156.0.1** on macOS. Firefox filtering checks used synthetic DOM fixtures with unchanged packaged runtime scripts and real browser storage/messaging in a temporary test extension. The submitted Firefox package also passed a manual popup check on live, signed-out YouTube and an options/theme-persistence check. Authenticated YouTube layouts and account watch-progress data remain unverified. See the [verification report](docs/verification-2026-09-27.md) for scope and limitations.
 
 ### Package
 

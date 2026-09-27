@@ -1,6 +1,6 @@
-# FreshView 3.1.0 development verification
+# FreshView 3.1.0 verification
 
-This implements the corrections proposed in the [September 2026 audit](extension-audit-2026-09-27.md). This report records local checks before the authorized 3.1.0 release; store submission status is tracked in the README. Existing unrelated files and archives were preserved.
+This implements the corrections proposed in the [September 2026 audit](extension-audit-2026-09-27.md). This report records implementation checks and follow-up testing of the submitted 3.1.0 package; store submission status is tracked in the README. Existing unrelated files and archives were preserved.
 
 ## Changes
 
@@ -67,14 +67,39 @@ A Firefox-specific package generated with an explicitly temporary test ID passed
 
 The maintainer confirmed that Firefox is a first publication and authorized it. The stable add-on ID is `freshview@roniel-rhack.github.io`. Generate its package with `scripts/package.py --firefox-id freshview@roniel-rhack.github.io`. The shared development manifest alone is not a signed Firefox distribution.
 
-**Firefox runtime remains unverified.** Firefox 155.0 failed before loading the extension with `Could not find profile folder`, both with temporary and explicitly created local profiles. A `web-ext run` attempt also failed to connect to that browser. This is an environment limitation, not a passing Firefox behavior test. Before claiming Firefox release readiness, run the behavior checks in a working Firefox 142+ installation and complete Mozilla signing/validation with the confirmed identity.
+### Installed Firefox 156.0.1 checks
+
+Follow-up testing on September 27, 2026 used the user's installed Firefox **156.0.1** on macOS, launched through its native interface. The exact submitted `FreshView-firefox.zip` was loaded temporarily through `about:debugging`. Firefox reported its background script as running under the stable add-on ID.
+
+On live, signed-out YouTube, the popup connected to the content script and displayed working controls. The threshold slider and keyboard-operated Hide Videos and View Threshold switches updated correctly. The options page loaded, its dark-theme switch worked by keyboard, and the selection persisted after reloading the page. The signed-out homepage had no watched cards, so this check does not establish filtering against account-specific live watch progress.
+
+A separate temporary test extension ran **14 regression groups, all passing**:
+
+1. Real Firefox storage and legacy/modern threshold filtering.
+2. Reordering and exact display-value/priority restoration.
+3. Reused links and late progress updates.
+4. Disabled threshold requiring 100% progress.
+5. Every page exclusion and Home query strings.
+6. Recommendation type filtering and preservation of playlist summaries.
+7. Search and playlist-row filters.
+8. Exact-page bookmarks and SPA navigation.
+9. Duplicate cards and detached-node cleanup.
+10. No observer loops or unrelated scans.
+11. Invalid persisted preference normalization.
+12. Runtime messaging between background and test-page contexts.
+13. Background loading of shared storage and constants.
+14. Disposal restoring hidden cards.
+
+All **15 runtime JavaScript files** in that test extension matched the submitted ZIP byte for byte. The harness used synthetic DOM fixtures in an extension page, real Firefox storage/change events and runtime messaging, a separate temporary add-on ID, and a loopback-only result collector. Its test manifest added the harness startup script and collector permission; these are not part of the submitted package. These fixtures exercise the filtering logic but do not reproduce content-script isolation on live YouTube. The separate manual package check above covers live popup/content-script connectivity.
+
+Both temporary add-ons were removed after testing, and the local result collector stopped. No production source changes were needed. Earlier Firefox 155 profile-launch failures and a subsequent `web-ext run` connection failure remain CLI environment limitations; native Firefox testing succeeded and supersedes the previous runtime-unverified status. Store approval/signing and authenticated live filtering remain separate checks.
 
 ## Store verification and remaining limits
 
 - The [Chrome Web Store listing](https://chromewebstore.google.com/detail/freshview-for-youtube/glologkcncopfogmaghfgcoloklmella) was verified on September 27, 2026 and lists 3.0.0. Version 3.1.0 was subsequently submitted and is pending review with automatic publication after approval.
 - The first Firefox release, 3.1.0, was submitted successfully under [freshview-youtube-roniel](https://addons.mozilla.org/en-US/firefox/addon/freshview-youtube-roniel/) and is awaiting review. Mozilla accepted the package with no errors or warnings. A source archive and reproduction instructions were supplied. The public listing remains unavailable until approval.
-- Current live YouTube layouts were inspected during the original audit. Final regression checks use controlled fixtures; authenticated account-specific layouts and watch-progress history still require a live smoke test.
+- Current live YouTube layouts were inspected during the original audit. Firefox popup connectivity was also checked on live, signed-out YouTube. Filtering regression checks use controlled fixtures; authenticated account-specific layouts and watch-progress history still require a live smoke test.
 - Keyboard interaction with popup/options was tested. Command-handler logic was tested independently; OS-level configured shortcut delivery was not automated.
 - Local checks and the [remote GitHub Actions packaging run](https://github.com/roniel-rhack/FreshView/actions/runs/36326950071) passed. Both browser-store submissions were completed after explicit maintainer authorization; store approval and public rollout remain external steps.
 
-Local reproduction artifacts live under the ignored `private/audit/` directory: `integration.cjs`, `integration-results.json`, `benchmark.cjs`, `benchmark-results.json`, `firefox-validation-results.json`, and popup/options screenshots. They are local checks, not a committed test suite or distributable content.
+Local reproduction artifacts live under the ignored `private/audit/` directory: `integration.cjs`, `integration-results.json`, `benchmark.cjs`, `benchmark-results.json`, `firefox-validation-results.json`, `firefox-installed-test.cjs`, `firefox-report-server.cjs`, `firefox-installed-test/`, `firefox-installed-results.json`, and popup/options screenshots, including `firefox-options-156.png`. They are local checks, not a committed test suite or distributable content.
