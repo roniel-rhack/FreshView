@@ -14,9 +14,9 @@ This is the maintained fork by [roniel-rhack](https://github.com/roniel-rhack) o
 
 **Chrome:** [Install FreshView from the Chrome Web Store](https://chromewebstore.google.com/detail/freshview-for-youtube/glologkcncopfogmaghfgcoloklmella).
 
-The store listing was verified on September 27, 2026 and offers **3.0.0**. This working tree contains **3.1.0**, which are not automatically included in the store version. No store publication is performed by the packaging workflow.
+Version **3.1.0** was submitted on September 27, 2026 and is **pending Chrome Web Store review**, with automatic publication after approval. The previously published version is **3.0.0**. The packaging workflow does not publish to stores.
 
-**Firefox:** the first Mozilla Add-ons submission for this fork is being prepared. A public installation link will be added after approval. Other similarly named extensions belong to different maintainers.
+**Firefox:** version **3.1.0** was submitted as this fork's first Mozilla Add-ons release on September 27, 2026 and is **awaiting review**. Its [Mozilla Add-ons page](https://addons.mozilla.org/en-US/firefox/addon/freshview-youtube-roniel/) will become publicly available after approval. Other similarly named extensions belong to different maintainers.
 
 ### Load the development version
 

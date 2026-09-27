@@ -17,7 +17,7 @@ This implements the corrections proposed in the [September 2026 audit](extension
 | Accessibility | Native switches remain focusable and have descriptive labels. Options is a native button. Switches, bookmark, and slider have visible focus. |
 | Excess UI/storage work | Removed redundant options listeners and the separate threshold-label storage listener. Slider input updates its display locally and persists on change. |
 | Packaging | Maintained GitHub Actions versions, explicit read-only repository permissions, and a shared Python packager validate all runtime references, including fonts. Firefox packaging accepts a maintainer-supplied add-on ID. |
-| Documentation | README now links the confirmed Chrome listing, distinguishes store/development versions, explains Firefox's unconfirmed store status, and documents actual controls, privacy, debugging, development, and packaging. AGENTS and CLAUDE guidance are aligned. |
+| Documentation | README now links the confirmed Chrome listing, distinguishes store/development versions, documents the first Firefox submission, and documents actual controls, privacy, debugging, development, and packaging. AGENTS and CLAUDE guidance are aligned. |
 
 ## Installed Chromium checks
 
@@ -71,10 +71,10 @@ The maintainer confirmed that Firefox is a first publication and authorized it. 
 
 ## Store verification and remaining limits
 
-- The [Chrome Web Store listing](https://chromewebstore.google.com/detail/freshview-for-youtube/glologkcncopfogmaghfgcoloklmella) was verified on September 27, 2026 and lists 3.0.0. The local changes are not published there.
-- A Firefox listing attributable to this fork was not found. The [similarly named Mozilla listing](https://addons.mozilla.org/en-US/firefox/addon/new-freshview-for-youtube/) is maintained by a different author and is not presented as this project's installation link.
+- The [Chrome Web Store listing](https://chromewebstore.google.com/detail/freshview-for-youtube/glologkcncopfogmaghfgcoloklmella) was verified on September 27, 2026 and lists 3.0.0. Version 3.1.0 was subsequently submitted and is pending review with automatic publication after approval.
+- The first Firefox release, 3.1.0, was submitted successfully under [freshview-youtube-roniel](https://addons.mozilla.org/en-US/firefox/addon/freshview-youtube-roniel/) and is awaiting review. Mozilla accepted the package with no errors or warnings. A source archive and reproduction instructions were supplied. The public listing remains unavailable until approval.
 - Current live YouTube layouts were inspected during the original audit. Final regression checks use controlled fixtures; authenticated account-specific layouts and watch-progress history still require a live smoke test.
 - Keyboard interaction with popup/options was tested. Command-handler logic was tested independently; OS-level configured shortcut delivery was not automated.
-- CI steps were executed locally, but the remote GitHub Actions workflow and browser-store submissions were not triggered.
+- Local checks and the [remote GitHub Actions packaging run](https://github.com/roniel-rhack/FreshView/actions/runs/36326950071) passed. Both browser-store submissions were completed after explicit maintainer authorization; store approval and public rollout remain external steps.
 
 Local reproduction artifacts live under the ignored `private/audit/` directory: `integration.cjs`, `integration-results.json`, `benchmark.cjs`, `benchmark-results.json`, `firefox-validation-results.json`, and popup/options screenshots. They are local checks, not a committed test suite or distributable content.
