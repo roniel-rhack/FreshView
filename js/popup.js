@@ -2,15 +2,15 @@
 // -----------------------------------------------------------------------------
 
 // Updates the states of the UI widgets when the URL of the current tab changes.
-function onTabUpdatedListener({}, changes, {}) {
-    if (changes.url) {
+function onTabUpdatedListener(tabID, changes, tab) {
+    if (tab.active && (changes.url || changes.status === "complete")) {
         widgets.forEach(widget => widget.load());
     }
 }
 
 // Updates the CSS theme when its value is changed in browser storage.
-function onStorageChangedListener(changes, _) {
-    if (DARK_MODE_CHECKBOX_STORAGE_KEY in changes) {
+function onStorageChangedListener(changes, area) {
+    if (area === "local" && DARK_MODE_CHECKBOX_STORAGE_KEY in changes) {
         setCSSTheme(changes[DARK_MODE_CHECKBOX_STORAGE_KEY]["newValue"]);
     }
 }
@@ -38,11 +38,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // View Threshold
         new ViewThresholdCheckbox(),
-        new ViewThresholdSlider(),
-        new ViewThresholdLabel()
+        new ViewThresholdSlider()
     ]
 
     chrome.tabs.onUpdated.addListener(onTabUpdatedListener);
+    chrome.tabs.onActivated.addListener(() => widgets.forEach(widget => widget.load()));
     chrome.storage.onChanged.addListener(onStorageChangedListener);
 });
 

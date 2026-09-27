@@ -1,12 +1,6 @@
 // This script initializes the options UI.
 // -----------------------------------------------------------------------------
 
-// Reloads a widget when its state is modified in browser storage.
-function onStorageChangedListener(changes, _) {
-    const changed = widgets.filter(widget => widget.storage_key in changes);
-    changed.forEach(widget => widget.load());
-}
-
 // Array of widgets appearing in the options UI. Since widgets can only be
 // instantiated after the DOM is loaded, the array is initially empty.
 let widgets = [];
@@ -68,7 +62,6 @@ document.addEventListener("DOMContentLoaded", () => {
         ),
     ];
 
-    chrome.storage.onChanged.addListener(onStorageChangedListener);
 });
 
 // Keep the CSS transitions instantaneous for the first animation frame to give

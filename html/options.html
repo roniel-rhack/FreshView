@@ -1,7 +1,8 @@
 <!doctype html>
-<html>
+<html lang="en">
     <head>
         <meta charset="UTF-8">
+        <title>FreshView Options</title>
         <!-- Style Sheets -->
         <link rel="stylesheet" type="text/css" href="../css/fonts.css">
         <link rel="stylesheet" type="text/css" href="../css/options.css">
@@ -15,7 +16,7 @@
     <body>
         <div class="header">
             <div class="header-title">FreshView for YouTube™</div>
-            <img class="header-logo" src="../img/icon.png"/>
+            <img class="header-logo" src="../img/icon.png" alt="FreshView logo"/>
             <div class="header-subtitle">Preferences</div>
         </div>
 
@@ -29,7 +30,7 @@
                 <div class="section-group-right">
                     <div class="section-option">
                         <div class="section-option-left toggle">
-                            <input id="dark-mode-checkbox" type="checkbox"/>
+                            <input id="dark-mode-checkbox" aria-label="Dark Mode" type="checkbox"/>
                             <label class="toggle" for="dark-mode-checkbox"></label>
                         </div>
                         <div class="section-option-right">
@@ -55,7 +56,7 @@
                 <div class="section-group-right">
                     <div class="section-option">
                         <div class="section-option-left toggle">
-                            <input id="hide-recommendations-checkbox" type="checkbox"/>
+                            <input id="hide-recommendations-checkbox" aria-label="Filter recommendations" type="checkbox"/>
                             <label class="toggle" for="hide-recommendations-checkbox"></label>
                         </div>
                         <div class="section-option-right">
@@ -67,7 +68,7 @@
                     </div>
                     <div class="section-option">
                         <div class="section-option-left toggle">
-                            <input id="hide-playlists-checkbox" type="checkbox"/>
+                            <input id="hide-playlists-checkbox" aria-label="Filter playlist videos" type="checkbox"/>
                             <label class="toggle" for="hide-playlists-checkbox"></label>
                         </div>
                         <div class="section-option-right">
@@ -79,7 +80,7 @@
                     </div>
                     <div class="section-option">
                         <div class="section-option-left toggle">
-                            <input id="hide-searches-checkbox" type="checkbox"/>
+                            <input id="hide-searches-checkbox" aria-label="Filter search results" type="checkbox"/>
                             <label class="toggle" for="hide-searches-checkbox"></label>
                         </div>
                         <div class="section-option-right">
@@ -97,7 +98,7 @@
                 <div class="section-group-right">
                     <div class="section-option">
                         <div class="section-option-left toggle">
-                            <input id="hide-channels-checkbox" type="checkbox"/>
+                            <input id="hide-channels-checkbox" aria-label="Filter channels" type="checkbox"/>
                             <label class="toggle" for="hide-channels-checkbox"></label>
                         </div>
                         <div class="section-option-right">
@@ -109,7 +110,7 @@
                     </div>
                     <div class="section-option">
                         <div class="section-option-left toggle">
-                            <input id="hide-home-checkbox" type="checkbox"/>
+                            <input id="hide-home-checkbox" aria-label="Filter Home" type="checkbox"/>
                             <label class="toggle" for="hide-home-checkbox"></label>
                         </div>
                         <div class="section-option-right">
@@ -121,7 +122,7 @@
                     </div>
                     <div class="section-option">
                         <div class="section-option-left toggle">
-                            <input id="hide-explore-checkbox" type="checkbox"/>
+                            <input id="hide-explore-checkbox" aria-label="Filter Explore" type="checkbox"/>
                             <label class="toggle" for="hide-explore-checkbox"></label>
                         </div>
                         <div class="section-option-right">
@@ -133,7 +134,7 @@
                     </div>
                     <div class="section-option">
                         <div class="section-option-left toggle">
-                            <input id="hide-subscriptions-checkbox" type="checkbox"/>
+                            <input id="hide-subscriptions-checkbox" aria-label="Filter Subscriptions" type="checkbox"/>
                             <label class="toggle" for="hide-subscriptions-checkbox"></label>
                         </div>
                         <div class="section-option-right">
@@ -145,19 +146,19 @@
                     </div>
                     <div class="section-option">
                         <div class="section-option-left toggle">
-                            <input id="hide-library-checkbox" type="checkbox"/>
+                            <input id="hide-library-checkbox" aria-label="Filter You and Library" type="checkbox"/>
                             <label class="toggle" for="hide-library-checkbox"></label>
                         </div>
                         <div class="section-option-right">
-                            <div class="section-option-title">Library</div>
+                            <div class="section-option-title">You / Library</div>
                             <div class="section-option-description">
-                                Hide watched videos in the <a target="_blank" href="https://www.youtube.com/feed/library">Library</a> tab.
+                                Hide watched videos in the <a target="_blank" href="https://www.youtube.com/feed/you">You</a> tab.
                             </div>
                         </div>
                     </div>
                     <div class="section-option">
                         <div class="section-option-left toggle">
-                            <input id="hide-history-checkbox" type="checkbox"/>
+                            <input id="hide-history-checkbox" aria-label="Filter History" type="checkbox"/>
                             <label class="toggle" for="hide-history-checkbox"></label>
                         </div>
                         <div class="section-option-right">

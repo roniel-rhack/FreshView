@@ -1,15 +1,19 @@
 {
     "manifest_version": 3,
-
     "name": "FreshView for YouTube™",
     "short_name": "FreshView for YouTube™",
     "description": "Hide YouTube™ videos you've already watched to easily discover fresh content.",
-    "version": "2.2.0",
-
+    "version": "3.1.0",
     "background": {
-        "service_worker": "js/service-worker.js"
+        "service_worker": "js/service-worker.js",
+        "scripts": [
+            "js/constants.js",
+            "js/logger.js",
+            "js/storage.js",
+            "js/path.js",
+            "js/service-worker.js"
+        ]
     },
-
     "commands": {
         "toggle-hide-videos-checkbox": {
             "description": "Toggle \"Hide Videos\""
@@ -18,9 +22,12 @@
             "description": "Toggle \"View Threshold\""
         }
     },
-
-    "content_scripts": [{
-            "matches": ["*://*.youtube.com/*"],
+    "content_scripts": [
+        {
+            "matches": [
+                "https://www.youtube.com/*",
+                "https://youtube.com/*"
+            ],
             "js": [
                 "js/album.js",
                 "js/constants.js",
@@ -35,20 +42,18 @@
                 "js/injection.js"
             ],
             "run_at": "document_idle"
-    }],
-
+        }
+    ],
     "icons": {
         "16": "img/icon16.png",
         "32": "img/icon32.png",
         "48": "img/icon48.png",
         "128": "img/icon128.png"
     },
-
     "options_ui": {
         "page": "html/options.html",
         "open_in_tab": true
     },
-
     "action": {
         "default_icon": {
             "16": "img/icon16.png",
@@ -60,12 +65,23 @@
         "default_popup": "html/popup.html",
         "default_title": "FreshView for YouTube™"
     },
-
     "permissions": [
         "storage"
     ],
-
     "host_permissions": [
-        "*://*.youtube.com/*"
-    ]
+        "https://www.youtube.com/*",
+        "https://youtube.com/*"
+    ],
+    "minimum_chrome_version": "121",
+    "browser_specific_settings": {
+        "gecko": {
+            "id": "freshview@roniel-rhack.github.io",
+            "strict_min_version": "142.0",
+            "data_collection_permissions": {
+                "required": [
+                    "none"
+                ]
+            }
+        }
+    }
 }

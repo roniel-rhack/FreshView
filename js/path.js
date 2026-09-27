@@ -1,39 +1,34 @@
-// This file contains the Path class.
-// -----------------------------------------------------------------------------
-
-/**
- * Path represents the path and query components of a URL.
- */
 class Path {
-    /**
-     * Parses the path and query components from a URL string.
-     *
-     * @param {string} url - The URL to be parsed.
-     *
-     * @returns {string} - Concatenation of the path and query components of the
-     * given URL.
-     */
-    static parse(url) {
-        const uri = new URL(url);
-        return uri.pathname + uri.search;
+    static supported(url) {
+        try {
+            const uri = new URL(url);
+            return uri.protocol === "https:" && ["youtube.com", "www.youtube.com"].includes(uri.hostname);
+        } catch (_) {
+            return false;
+        }
     }
 
-    /**
-     * Invokes the given callback with the path and query components of the
-     * current YouTube page.
-     *
-     * @param {*} callback - Function to be called with the page.
-     */
-    static get(callback) {
-        const wrapper = (tabs) => {
-            if (tabs.length > 0) {
-                const page = Path.parse(tabs[0].url);
-                callback(page);
-            } else {
-                Logger.info("Failed to retrieve the URL of the current YouTube page.");
-            }
+    static parse(url) {
+        try {
+            const uri = new URL(url);
+            return uri.pathname + uri.search;
+        } catch (_) {
+            return undefined;
         }
+    }
 
-        chrome.tabs.query({active: true, currentWindow: true}, wrapper);
+    static pathname(path) {
+        try { return new URL(path, "https://www.youtube.com").pathname; }
+        catch (_) { return ""; }
+    }
+
+    static get(callback) {
+        chrome.tabs.query({active: true, currentWindow: true}, tabs => {
+            if (chrome.runtime.lastError || !Path.supported(tabs[0]?.url)) {
+                callback(undefined);
+                return;
+            }
+            callback(Path.parse(tabs[0].url));
+        });
     }
 }

@@ -1,12 +1,12 @@
 <!doctype html>
-<html>
+<html lang="en">
     <head>
         <meta charset="UTF-8">
+        <title>FreshView</title>
         <link rel="stylesheet" type="text/css" href="../css/fonts.css">
         <link rel="stylesheet" type="text/css" href="../css/popup.css">
         <script src="../js/constants.js"></script>
         <script src="../js/logger.js"></script>
-        <script src="../js/manager.js"></script>
         <script src="../js/path.js"></script>
         <script src="../js/storage.js"></script>
         <script src="../js/widget.js"></script>
@@ -14,21 +14,22 @@
     </head>
     <body>
         <div id="header">
-            <img id="logo" src="../img/icon.png"/>
+            <img id="logo" src="../img/icon.png" alt="FreshView logo"/>
             <span id="title">FreshView</span>
             <div id="actions">
                 <div class="action">
-                    <span id="options-span" class="material-icons">tune</span>
+                    <button id="options-span" type="button" class="material-icons" aria-label="Options">tune</button>
                     <span id="options-tooltip" class="tooltip">Options</span>
                 </div>
             </div>
         </div>
+        <p id="page-status" role="status" hidden></p>
         <div id="controls">
             <!-- "Hide Videos" controls -->
             <div class="control">
                 <div class="control-margin">
                     <div class="toggle">
-                        <input id="hide-videos-checkbox" type="checkbox"/>
+                        <input id="hide-videos-checkbox" disabled aria-label="Hide watched videos" type="checkbox"/>
                         <label class="toggle" for="hide-videos-checkbox"></label>
                     </div>
                 </div>
@@ -39,7 +40,7 @@
                             <div class="control-help">Toggles the visibility of watched videos.</div>
                         </div>
                         <div class="control-bookmark">
-                            <input type="checkbox" id="hide-videos-bookmark">
+                            <input type="checkbox" id="hide-videos-bookmark" disabled aria-label="Lock Hide Videos on this page">
                             <label class="material-icons" for="hide-videos-bookmark">vpn_lock</label>
                             <span id="hide-videos-tooltip" class="tooltip">Lock the Hide Videos toggle on this page.</span>
                         </div>
@@ -50,7 +51,7 @@
             <div class="control">
                 <div class="control-margin">
                     <div class="toggle">
-                        <input id="view-threshold-checkbox" type="checkbox">
+                        <input id="view-threshold-checkbox" aria-label="Enable view threshold" type="checkbox">
                         <label class="toggle" for="view-threshold-checkbox"></label>
                     </div>
                 </div>
@@ -60,7 +61,7 @@
                         <div class="control-help">Adjusts the viewing threshold of watched videos.</div>
                     </div>
                     <div class="control-slider">
-                        <input id="view-threshold-slider" class="control-slider" type="range" min="1" max="100" step="1" value="90">
+                        <input id="view-threshold-slider" aria-label="Minimum watched percentage" class="control-slider" type="range" min="1" max="100" step="1" value="90">
                         <label id="view-threshold-percent" class="control-slider" for="view-threshold-slider">100%</label>
                     </div>
                 </div>

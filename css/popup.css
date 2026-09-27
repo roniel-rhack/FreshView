@@ -246,7 +246,10 @@ div.control-bookmark {
 }
 
 div.control-bookmark input {
-    display: none;
+    position: absolute;
+    opacity: 0;
+    width: 1px;
+    height: 1px;
 }
 
 div.control-bookmark label {
@@ -298,5 +301,29 @@ span.tooltip {
     opacity: 1;
     transition-delay: var(--transition-delay-tooltip);
     transition-duration: var(--transition-duration-tooltip);
+    visibility: visible;
+}
+
+#options-span {
+    background: transparent;
+    border: 0;
+    color: inherit;
+    cursor: pointer;
+    padding: 0;
+}
+
+#page-status {
+    color: var(--font-colour-primary);
+    font-size: 0.85rem;
+    margin: 0;
+    padding: 8px 15px;
+}
+
+input:disabled + label.material-icons {
+    opacity: 0.5;
+}
+
+:focus-visible ~ span.tooltip {
+    opacity: 1;
     visibility: visible;
 }

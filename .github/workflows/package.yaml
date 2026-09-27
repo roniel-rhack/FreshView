@@ -2,26 +2,29 @@ name: Package
 on:
   pull_request:
   push:
-    branches:
-      - master
+    branches: [master]
   release:
+    types: [published]
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
-  Zip:
+  package:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v2
-
-      - uses: actions/upload-artifact@v2
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - name: Check JavaScript syntax
+        run: |
+          for file in js/*.js; do node --check "$file" || exit 1; done
+      - name: Validate and package runtime resources
+        run: python3 scripts/package.py --output private/dist/FreshView.zip
+      - uses: actions/upload-artifact@v7
         with:
           name: FreshView
-          path: |
-            assets/
-            css/
-            html/
-            img/
-            js/
-            LICENSE
-            manifest.json
+          path: private/dist/FreshView.zip
+          archive: false
+          if-no-files-found: error

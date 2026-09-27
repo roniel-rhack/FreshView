@@ -7,11 +7,10 @@
  */
 class Settings {
     /**
-     * Constructs a new Settings object and, for convenience, loads its state.
+     * Constructs default settings; callers load persisted values once ready.
      */
     constructor() {
-        this.state = SETTINGS_DEFAULT_STATE;
-        this.load();
+        this.state = {...SETTINGS_DEFAULT_STATE};
     }
 
     /**
@@ -75,7 +74,7 @@ class Settings {
      */
     load(continuation) {
         const callback = (values) => {
-            Logger.debug("Settings.load(): loaded", values, ".");
+            Logger.debug("Settings.load(): preferences loaded.");
             this.state = values;
             if (continuation !== undefined) {
                 continuation();

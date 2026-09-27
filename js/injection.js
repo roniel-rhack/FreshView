@@ -1,48 +1,25 @@
-// This content script initializes the Manager singleton and registers listeners
-// for browser message and storage events.
-// -----------------------------------------------------------------------------
-
-/**
- * Listens to browser message events which indicate that one of the following
- * events associated with the page corresponding to the running instance of the
- * content script has occurred:
- *
- * 1. The URL of the page has changed.
- * 2. The popup script has issued a page filter query.
- *
- * @see https://developer.chrome.com/docs/extensions/reference/runtime/#event-onMessage
- */
-function onMessageListener(request, {}, sendResponse) {
-    Logger.debug(`onMessageListener(): received "${request.message}" message.`);
-    if (request.message === URL_CHANGE_MESSAGE) {
-        manager.display();
-    } else if (request.message === PAGE_FILTER_QUERY_MESSAGE) {
-        manager.settings.load(() => sendResponse(manager.settings.ignored()));
-        // Indicate that sendResponse() will be invoked asynchronously.
-        return true;
-    }
-};
-
-/**
- * Listens for storage change events which indicate that the current state
- * of the Settings object is outdated.
- *
- * @see https://developer.chrome.com/docs/extensions/reference/storage/#event-onChanged
- */
-function onStorageChangedListener(changes, {}) {
-    Logger.debug("onStorageChangedListener(): changed", changes, ".");
-    const keys = Array.from(Object.keys(SETTINGS_DEFAULT_STATE));
-    if (keys.some(key => changes.hasOwnProperty(key))) {
-        manager.settings.load(() => manager.request());
-    }
-}
-
-// -----------------------------------------------------------------------------
-
+// These globals belong to the extension's isolated content-script context.
+window.FRESHVIEW_DEBUG = false;
 const manager = new Manager();
 
-chrome.runtime.onMessage.addListener(onMessageListener);
-chrome.storage.onChanged.addListener(onStorageChangedListener);
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+    if (sender.id !== chrome.runtime.id) return;
+    if (request.message === URL_CHANGE_MESSAGE) {
+        manager.request();
+    } else if (request.message === PAGE_FILTER_QUERY_MESSAGE) {
+        manager.settings.load(() => sendResponse(manager.settings.ignored()));
+        return true;
+    }
+});
 
-// Note: In MV3, the action icon is always visible, so we no longer need
-// to send "showPageAction" messages to the background script.
+chrome.storage.onChanged.addListener((changes, area) => {
+    if (area === "local" && Object.keys(SETTINGS_DEFAULT_STATE).some(key => Object.hasOwn(changes, key))) {
+        manager.settings.load(() => manager.request());
+    }
+});
+
+// YouTube retains and reuses cards during client-side navigation.
+document.addEventListener("yt-navigate-finish", () => manager.request());
+window.addEventListener("popstate", () => manager.request());
+window.addEventListener("pagehide", event => { if (!event.persisted) manager.dispose(); });
+window.addEventListener("pageshow", event => { if (event.persisted) manager.request(); });

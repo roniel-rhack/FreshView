@@ -18,9 +18,9 @@ class Logger {
         if (Logger.ENABLED) console.warn(...args);
     }
 
-    // Logs an error message if the Logger is enabled.
+    // Always report operational errors.
     static error(...args) {
-        if (Logger.ENABLED) console.error(...args);
+        console.error(...args);
     }
 }
 

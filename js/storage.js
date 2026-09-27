@@ -1,38 +1,39 @@
-// This script implements the Storage class.
-// -----------------------------------------------------------------------------
-
-// Storage wraps the browser local storage API.  The synced storage API is not
-// used because it has restrictive quotas and is not permitted in the context
-// of a temporary Firefox extension.
 class Storage {
-    // Gets the specified items from local storage and invokes the given callback.
-    // The items must be an object which maps keys to their default values.
-    // Likewise, the callback must accept an object with the same shape as input.
-    static get(items, callback) {
-        const decorator = (contents) => {
-            if (chrome.runtime.lastError) {
-                Logger.error(`Storage.get(): failed to get items ${items}: ${chrome.runtime.lastError.message}.`);
-            } else {
-                const values = {};
-                for (const [key, value] of Object.entries(items)) {
-                    values[key] = contents.hasOwnProperty(key) ? contents[key] : value;
-                }
-                callback(values);
-            }
+    static normalize(value, fallback) {
+        if (typeof fallback === "boolean") return typeof value === "boolean" ? value : fallback;
+        if (typeof fallback === "number") {
+            const number = typeof value === "number" || (typeof value === "string" && value.trim()) ? Number(value) : NaN;
+            return Number.isFinite(number) ? Math.max(1, Math.min(100, Math.round(number))) : fallback;
         }
-        chrome.storage.local.get(Object.keys(items), decorator);
+        if (fallback && typeof fallback === "object") {
+            const bookmarks = Object.create(null);
+            if (value && typeof value === "object" && !Array.isArray(value)) {
+                for (const [key, state] of Object.entries(value)) {
+                    if (key.startsWith("/") && typeof state === "boolean") bookmarks[key] = state;
+                }
+            }
+            return bookmarks;
+        }
+        return value === undefined ? fallback : value;
     }
 
-    // Sets the specified items from local storage and invokes the given callback
-    // if one is provided.  The items must be given in the form of an object.
-    static set(items, callback) {
-        const decorator = () => {
-            if (chrome.runtime.lastError) {
-                Logger.error(`Storage.set(): failed to set items ${items}: ${chrome.runtime.lastError.message}.`);
-            } else if (callback !== undefined) {
-                callback();
+    static get(items, callback) {
+        chrome.storage.local.get(Object.keys(items), contents => {
+            const error = chrome.runtime.lastError;
+            if (error) Logger.error("FreshView could not read preferences:", error.message);
+            const values = {};
+            for (const [key, fallback] of Object.entries(items)) {
+                values[key] = Storage.normalize(error ? undefined : contents?.[key], fallback);
             }
-        }
-        chrome.storage.local.set(items, decorator);
+            callback(values);
+        });
+    }
+
+    static set(items, callback) {
+        chrome.storage.local.set(items, () => {
+            const error = chrome.runtime.lastError;
+            if (error) Logger.error("FreshView could not save preferences:", error.message);
+            if (callback) callback(!error);
+        });
     }
 }

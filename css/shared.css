@@ -42,6 +42,8 @@
     --transition-duration-colour: 0s;
     --transition-duration-slider: 0s;
     --transition-duration-toggle: 0s;
+    --transition-duration-tooltip: 0.2s;
+    --border-colour-tooltips: #4D4D4D;
 }
 
 :root[data-theme='dark'] {
@@ -72,6 +74,8 @@
     --transition-duration-colour: 0s;
     --transition-duration-slider: 0s;
     --transition-duration-toggle: 0s;
+    --transition-duration-tooltip: 0.2s;
+    --border-colour-tooltips: #4D4D4D;
 }
 
 /* Section 2: Toggle Styles --------------------------------------------------*/
@@ -89,9 +93,10 @@ div.toggle {
 /* Toggle Checkbox Styles */
 div.toggle input {
     -moz-appearance: none;
-    display: none;
-    height: 0;
-    width: 0;
+    position: absolute;
+    opacity: 0;
+    height: 1px;
+    width: 1px;
 }
 
 /* Toggle Thumb Styles */
@@ -127,4 +132,9 @@ label.toggle {
 input:disabled + label.toggle {
     cursor: default;
     opacity: 0.38;
+}
+
+input:focus-visible + label, button:focus-visible, input[type="range"]:focus-visible {
+    outline: 2px solid var(--accent-colour);
+    outline-offset: 4px;
 }
