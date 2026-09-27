@@ -21,7 +21,9 @@ jobs:
         run: |
           for file in js/*.js; do node --check "$file" || exit 1; done
       - name: Validate and package runtime resources
-        run: python3 scripts/package.py --output private/dist/FreshView.zip
+        run: |
+          python3 scripts/package.py --output private/dist/FreshView.zip
+          python3 scripts/package.py --check --firefox-id "freshview@roniel-rhack.github.io"
       - uses: actions/upload-artifact@v7
         with:
           name: FreshView

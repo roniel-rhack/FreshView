@@ -47,6 +47,9 @@ def validate_locales(files, manifest):
 
 def validate(files):
     manifest = json.loads(files["manifest.json"])
+    background = manifest["background"]
+    if ("service_worker" in background) == ("scripts" in background):
+        raise ValueError("Use exactly one background type per browser manifest")
     validate_locales(files, manifest)
     references = list(manifest["icons"].values())
     references += list(manifest["action"]["default_icon"].values())
@@ -90,7 +93,14 @@ def main():
     if args.firefox_id:
         firefox = json.loads(files["manifest.json"])
         firefox["browser_specific_settings"]["gecko"]["id"] = args.firefox_id
-        firefox["background"].pop("service_worker", None)
+        worker = firefox["background"]["service_worker"]
+        dependencies = []
+        for call in re.findall(r'importScripts\(([^)]*)\)', files[worker].decode()):
+            dependencies += re.findall(r'["\']([^"\']+)["\']', call)
+        firefox["background"] = {"scripts": [
+            posixpath.normpath(posixpath.join(posixpath.dirname(worker), dependency))
+            for dependency in dependencies
+        ] + [worker]}
         firefox.pop("minimum_chrome_version", None)
         files["manifest.json"] = (json.dumps(firefox, indent=4) + "\n").encode()
     manifest = validate(files)

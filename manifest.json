@@ -5,14 +5,7 @@
     "description": "__MSG_extensionDescription__",
     "version": "3.2.0",
     "background": {
-        "service_worker": "js/service-worker.js",
-        "scripts": [
-            "js/constants.js",
-            "js/logger.js",
-            "js/storage.js",
-            "js/path.js",
-            "js/service-worker.js"
-        ]
+        "service_worker": "js/service-worker.js"
     },
     "commands": {
         "toggle-hide-videos-checkbox": {

@@ -68,12 +68,12 @@ Both 3.1.0 submissions were completed on September 27, 2026. Similarly named Fir
 
 ### Try the development version
 
-No build step or dependency installation is needed for the extension itself.
+Chrome can load the repository directly. Firefox needs the browser-specific package generated with Python; no JavaScript dependency installation is needed.
 
 | Browser | Requirements | Load locally |
 | --- | --- | --- |
 | Chrome / compatible Chromium | **Chrome 121+** | Open `chrome://extensions` (or `edge://extensions`), enable **Developer mode**, choose **Load unpacked**, and select this repository's root folder. |
-| Firefox | **Firefox 142+** | Open `about:debugging#/runtime/this-firefox`, choose **Load Temporary Add-on**, and select `manifest.json`. Allow access to YouTube if requested. |
+| Firefox | **Firefox 142+** | Generate the [Firefox package](#build-packages), open `about:debugging#/runtime/this-firefox`, choose **Load Temporary Add-on**, and select the generated `FreshView-firefox.zip`. Allow access to YouTube if requested. |
 
 Firefox's temporary installation lasts until the browser restarts. After changing or updating a local installation, reload the extension and refresh open YouTube tabs.
 
@@ -179,7 +179,7 @@ Syntax and package checks do not replace browser testing. Verify hide/restore, t
 ### Build packages
 
 ```sh
-# Chromium/shared package
+# Chromium package
 python3 scripts/package.py --output private/dist/FreshView.zip
 
 # Firefox-only manifest with the stable add-on identity
@@ -187,6 +187,8 @@ python3 scripts/package.py \
   --firefox-id "freshview@roniel-rhack.github.io" \
   --output private/dist/FreshView-firefox.zip
 ```
+
+The root manifest and Chromium archive use only `background.service_worker`. The Firefox archive uses only `background.scripts`, generated from the worker's shared imports in dependency order. Load the generated archive in Firefox, not the root manifest.
 
 Archives contain runtime files and the license. Resource references, locale keys, substitutions, and Chinese aliases are validated before packaging and again inside the archive. README screenshots and development artifacts are excluded. Preserve the Firefox add-on ID for updates; distribution still requires Mozilla validation/signing.
 

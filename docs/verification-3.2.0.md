@@ -60,3 +60,9 @@ Artifacts:
 ## Remaining limits
 
 Filtering regression checks use synthetic YouTube DOM fixtures. The Firefox live page was signed out and had no watched cards; authenticated watch-progress layouts remain unverified. The six language layouts were exercised in Chromium through native catalog fallback, not through six separately installed browser interface-language packs. Firefox's manual UI check used English. Translations have not received independent native-speaker review. Store listing translations, approval, signing, and publication are separate release steps.
+
+## Follow-up: browser-specific background manifests
+
+Chrome reported that `background.scripts` requires Manifest V2 because the shared root manifest contained both background types. The root manifest now contains only `background.service_worker`. Firefox packaging derives its ordered `background.scripts` list from the worker's static imports and removes the worker entry. Firefox development installations must use the generated ZIP rather than the root manifest.
+
+An isolated Chromium installation reported zero install warnings, manifest errors, or runtime errors, and its service worker started. The generated Firefox package payload was byte-for-byte identical to the previously tested 3.2.0 package; Mozilla lint again reported zero errors, warnings, or notices. A negative packaging check confirmed that mixed background manifests are rejected. CI now validates the Firefox target alongside the Chromium package.

@@ -12,7 +12,7 @@ FreshView for YouTube hides watched video cards using progress indicators presen
 
 There is no package manifest, build step, dependency installation, or committed automated test suite. The root directory is the unpacked extension.
 
-- `manifest.json` defines Manifest V3 permissions, content-script order, popup, options page, and the background service worker. Preserve dependency ordering: `injection.js` initializes classes declared by earlier scripts.
+- `manifest.json` targets Chromium and defines Manifest V3 permissions, content-script order, popup, options page, and only the background service worker. The Firefox packager replaces it with background scripts derived from the worker's static imports; load that generated ZIP in Firefox. Never put both background types in one manifest. Preserve dependency ordering: `injection.js` initializes classes declared by earlier scripts.
 - `js/injection.js` creates the content-script `Manager` and registers message/storage listeners. Content scripts execute in an isolated JavaScript world.
 - `js/manager.js` coordinates DOM observation, extraction, album merging, and visibility. `js/extractor.js` owns selectors for video containers.
 - `js/video.js` reads video links/progress and controls card visibility. `js/album.js` tracks video wrappers. Album identity is the DOM element, so duplicate videos remain independent and original display styles survive reordering.
