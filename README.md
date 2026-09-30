@@ -21,7 +21,7 @@ FreshView hides YouTube video cards using the watch-progress bars already displa
 
 Maintained by [roniel-rhack](https://github.com/roniel-rhack), based on [Mandrenkov's original FreshView](https://github.com/Mandrenkov/FreshView).
 
-> **Development version: 3.2.0.** The screenshots and instructions below show this version. It has not been submitted to the browser stores; see [store availability](#install) before installing.
+> **Current release: 3.2.1.** Available in Chrome Web Store and Mozilla Add-ons. This release includes the refreshed UI, six automatic interface languages, and browser-specific background manifests. [Install FreshView](#install).
 
 ## A look at FreshView
 
@@ -57,16 +57,16 @@ Settings brings appearance, video types, and page filters together. Labels are c
 
 ## Install
 
-**Last confirmed store status: September 27, 2026.** Store submissions and public availability are separate steps.
+**Store availability verified: September 30, 2026.** Install the current release directly from your browser's official store.
 
-| Browser | Available to install | Under review |
+| Browser | Install | Current version |
 | --- | --- | --- |
-| **Chrome** | [Chrome Web Store — 3.0.0](https://chromewebstore.google.com/detail/freshview-for-youtube/glologkcncopfogmaghfgcoloklmella) | **3.1.0**, submitted with automatic publication after approval |
-| **Firefox** | This fork's first public release is awaiting approval | **3.1.0** — [Mozilla Add-ons listing](https://addons.mozilla.org/en-US/firefox/addon/freshview-youtube-roniel/) becomes available after approval |
+| **Chrome** | [Chrome Web Store](https://chromewebstore.google.com/detail/freshview-for-youtube/glologkcncopfogmaghfgcoloklmella) | **3.2.1** |
+| **Firefox** | [Mozilla Add-ons](https://addons.mozilla.org/en-US/firefox/addon/freshview-youtube-roniel/) | **3.2.1** |
 
-Both 3.1.0 submissions were completed on September 27, 2026. Similarly named Firefox extensions may belong to other maintainers. GitHub's packaging workflow does not publish to either store.
+Version 3.2.1 is approved and publicly available in both stores. The links above identify this maintained fork; similarly named Firefox extensions may belong to other maintainers. GitHub's packaging workflow does not publish to either store.
 
-### Try the development version
+### Load locally for development
 
 Chrome can load the repository directly. Firefox needs the browser-specific package generated with Python; no JavaScript dependency installation is needed.
 
@@ -122,7 +122,16 @@ The extension automatically follows the browser's **interface language**, with E
 
 Choose **System**, **Light**, or **Dark** in Settings. System follows the device's appearance and is the default for new installations; explicit light/dark preferences from older versions are preserved. Controls have visible keyboard focus and respect reduced-motion preferences.
 
-## What's new in 3.2.0
+## What's new in 3.2.1
+
+- Remove Chrome's Manifest V3 warning by keeping only `background.service_worker` in the Chromium manifest.
+- Generate Firefox's ordered background scripts during packaging, preserving its add-on identity and runtime behavior.
+- Reject mixed background configurations and validate both browser targets in CI.
+- Include all 3.2.0 interface, theme, translation, and documentation improvements below.
+
+See the [3.2.1 release verification](docs/verification-3.2.1.md).
+
+### Included from 3.2.0
 
 - **Six-language interface:** popup, settings, status messages, accessibility labels, extension description, and shortcut descriptions.
 - **Clearer controls:** clickable labels, explanations of the watched percentage, and distinct lock/unlock icons and text.
