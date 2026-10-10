@@ -8,6 +8,12 @@ const I18n = {
             style: "percent", maximumFractionDigits: 0
         }).format(Number(value) / 100);
     },
+    age(step) {
+        const [count, unit] = AGE_THRESHOLD_STEPS[Number(step) - 1] || AGE_THRESHOLD_STEPS[AGE_THRESHOLD_SLIDER_DEFAULT_STATE - 1];
+        return new Intl.NumberFormat(chrome.i18n.getUILanguage(), {
+            style: "unit", unit, unitDisplay: "long"
+        }).format(count);
+    },
     apply() {
         document.documentElement.lang = this.message("uiLanguage");
         document.documentElement.dir = this.message("uiDirection");

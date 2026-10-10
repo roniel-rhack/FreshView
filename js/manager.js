@@ -11,7 +11,7 @@ class Manager {
         this.settings.load(() => {
             this.settingsLoaded = true;
             this.observer.observe(document, {
-                childList: true, subtree: true, attributes: true,
+                childList: true, subtree: true, attributes: true, characterData: true,
                 attributeFilter: ["style", "href", "class", "hidden", "is-history", "is-shorts", "is-ad", "page-subtype"]
             });
             this.request();
@@ -19,14 +19,14 @@ class Manager {
     }
 
     active() {
-        return this.settingsLoaded && this.settings.hidden() && !this.settings.ignored();
+        return this.settingsLoaded && (this.settings.hidden() || this.settings.maxAge() < Infinity) && !this.settings.ignored();
     }
 
     onMutations(records) {
         if (!this.active()) return;
         let removed = false;
         for (const record of records) {
-            const target = record.target;
+            const target = record.type === "characterData" ? record.target.parentElement : record.target;
             if (record.type === "attributes") {
                 // Card display writes are ours; progress styles are the host's.
                 if (record.attributeName === "style" && !target.matches(Video.PROGRESS_SELECTOR)) continue;
@@ -83,9 +83,10 @@ class Manager {
             for (const element of this.album.videos.keys()) {
                 if (!element.isConnected) this.album.remove(element);
             }
+            const matches = this.settings.matcher();
             for (const element of pending) {
                 const video = this.album.videos.get(element) || new Video(element);
-                if (element.isConnected && Extractor.eligible(element, this.settings.state) && video.getViewed(this.settings.threshold())) {
+                if (element.isConnected && Extractor.eligible(element, this.settings.state) && matches(video)) {
                     this.album.add(video);
                 } else {
                     this.album.remove(element);
@@ -103,7 +104,7 @@ class Manager {
 
     extract() {
         if (!this.active()) return new Album();
-        return new Album(new Extractor().extract(document, this.settings.threshold(), this.settings.state));
+        return new Album(new Extractor().extract(document, this.settings.state, this.settings.matcher()));
     }
 
     dispose() {

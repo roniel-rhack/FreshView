@@ -103,6 +103,24 @@
     },
     "description": "$PERCENT$ watched"
   },
+  "ageTitle": {
+    "message": "Age threshold",
+    "description": "Age threshold"
+  },
+  "ageSummary": {
+    "message": "Hide videos older than $AGE$.",
+    "placeholders": {
+      "age": {
+        "content": "$1",
+        "example": "6 months"
+      }
+    },
+    "description": "Hide videos older than $AGE$."
+  },
+  "ageOff": {
+    "message": "Videos of any age are shown.",
+    "description": "Videos of any age are shown."
+  },
   "lockPage": {
     "message": "Lock setting on this page",
     "description": "Lock setting on this page"

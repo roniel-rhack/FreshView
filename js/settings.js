@@ -67,6 +67,32 @@ class Settings {
     }
 
     /**
+     * Returns the oldest age of a visible video.
+     *
+     * @returns {number} - Maximum age in hours, or Infinity when the age
+     * threshold is disabled.
+     */
+    maxAge() {
+        if (this.state[AGE_THRESHOLD_CHECKBOX_STORAGE_KEY] !== true) return Infinity;
+        const [count, unit] = AGE_THRESHOLD_STEPS[this.state[AGE_THRESHOLD_SLIDER_STORAGE_KEY] - 1]
+            || AGE_THRESHOLD_STEPS[AGE_THRESHOLD_SLIDER_DEFAULT_STATE - 1];
+        return count * AGE_UNIT_HOURS[unit];
+    }
+
+    /**
+     * Returns a predicate reporting whether a video should be hidden on the
+     * current page.
+     *
+     * @returns {function(Video): boolean} - True iff the video is watched
+     * while hiding is enabled, or older than the age threshold.
+     */
+    matcher() {
+        const threshold = this.hidden() ? this.threshold() : Infinity;
+        const age = this.maxAge();
+        return video => video.getViewed(threshold) || (age < Infinity && video.getAge() > age);
+    }
+
+    /**
      * Loads the state from browser storage and then invokes the given callback
      * if one is provided.
      *

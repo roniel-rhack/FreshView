@@ -32,6 +32,11 @@
                 <div class="slider-row"><input id="view-threshold-slider" type="range" min="1" max="100" step="1" value="90" aria-labelledby="threshold-heading" aria-describedby="threshold-help"><output id="view-threshold-percent" for="view-threshold-slider">90%</output></div>
                 <p id="threshold-help" class="setting-help"></p>
             </section>
+            <section class="settings-card threshold-card" aria-labelledby="age-heading">
+                <label class="setting-row" for="age-threshold-checkbox"><span class="setting-title" id="age-heading" data-i18n="ageTitle">Age threshold</span><span class="switch"><input id="age-threshold-checkbox" type="checkbox" aria-describedby="age-help"><span class="switch-track" aria-hidden="true"></span></span></label>
+                <div class="slider-row"><input id="age-threshold-slider" type="range" min="1" max="19" step="1" value="13" aria-labelledby="age-heading" aria-describedby="age-help"><output id="age-threshold-value" for="age-threshold-slider">6 months</output></div>
+                <p id="age-help" class="setting-help"></p>
+            </section>
         </main>
     </body>
 </html>

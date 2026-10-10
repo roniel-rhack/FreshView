@@ -102,6 +102,7 @@ def main():
             for dependency in dependencies
         ] + [worker]}
         firefox.pop("minimum_chrome_version", None)
+        firefox["page_action"] = {**firefox["action"], "show_matches": firefox["host_permissions"]}
         files["manifest.json"] = (json.dumps(firefox, indent=4) + "\n").encode()
     manifest = validate(files)
     if not args.check:

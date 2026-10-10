@@ -42,11 +42,11 @@ class Extractor {
         return true;
     }
 
-    extract(root, threshold, state) {
+    extract(root, state, matches) {
         return Array.from(Extractor.candidates(root))
             .filter(element => Extractor.eligible(element, state))
             .map(element => new Video(element))
-            .filter(video => video.getViewed(threshold));
+            .filter(matches);
     }
 }
 

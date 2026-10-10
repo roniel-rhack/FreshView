@@ -103,6 +103,24 @@
     },
     "description": "$PERCENT$ watched"
   },
+  "ageTitle": {
+    "message": "Antigüedad máxima",
+    "description": "Age threshold"
+  },
+  "ageSummary": {
+    "message": "Ocultar vídeos de hace más de $AGE$.",
+    "placeholders": {
+      "age": {
+        "content": "$1",
+        "example": "6 months"
+      }
+    },
+    "description": "Hide videos older than $AGE$."
+  },
+  "ageOff": {
+    "message": "Se muestran vídeos de cualquier antigüedad.",
+    "description": "Videos of any age are shown."
+  },
   "lockPage": {
     "message": "Bloquear ajuste en esta página",
     "description": "Lock setting on this page"

@@ -82,7 +82,8 @@ Firefox's temporary installation lasts until the browser restarts. After changin
 1. Open [desktop YouTube](https://www.youtube.com/).
 2. Open FreshView and enable **Hide watched videos**. It is off by default.
 3. Adjust **Minimum watched**. The default is **90%**; turning this control off hides only videos marked **100% watched**.
-4. Open **Settings** to choose page filters, video types, and appearance. **History** is excluded by default.
+4. Enable **Age threshold** to hide videos older than the selected age, from 1 hour to 20 years. It is off by default and works independently of **Hide watched videos**.
+5. Open **Settings** to choose page filters, video types, and appearance. **History** is excluded by default.
 
 ### Lock a page's preference
 
@@ -165,6 +166,7 @@ Page locks store the pathname and query string of pages you explicitly lock. Not
 ## Known limitations
 
 - A video needs a usable progress indicator in YouTube's page markup to be filtered. A watched video without one stays visible.
+- **Age threshold** reads the English upload age ("3 months ago") from each card. Videos stay visible when YouTube displays another language or no upload age.
 - YouTube can change its markup or serve different layouts. Please report reproducible failures.
 - Only HTTPS desktop `youtube.com` and `www.youtube.com` are supported. Mobile YouTube, Music, Studio, embedded players, and other subdomains are not filtered.
 - Filtering tests use controlled fixtures; authenticated account-specific watch-progress layouts remain unverified. Translations have not received independent native-speaker review.

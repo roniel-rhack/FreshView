@@ -103,6 +103,24 @@
     },
     "description": "$PERCENT$ watched"
   },
+  "ageTitle": {
+    "message": "發布時間門檻",
+    "description": "Age threshold"
+  },
+  "ageSummary": {
+    "message": "隱藏發布超過 $AGE$ 的影片。",
+    "placeholders": {
+      "age": {
+        "content": "$1",
+        "example": "6 months"
+      }
+    },
+    "description": "Hide videos older than $AGE$."
+  },
+  "ageOff": {
+    "message": "顯示所有發布時間的影片。",
+    "description": "Videos of any age are shown."
+  },
   "lockPage": {
     "message": "固定此頁面的設定",
     "description": "Lock setting on this page"

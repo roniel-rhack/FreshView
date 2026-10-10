@@ -28,6 +28,21 @@ class Video {
         return progress <= 100 && progress >= threshold;
     }
 
+    getAge() {
+        if (!this.deriveURL()) return undefined;
+        for (const element of [...this.element.querySelectorAll(Video.AGE_SELECTOR), this.element]) {
+            const match = Video.AGE_PATTERN.exec(element.textContent);
+            if (match) return Number(match[1]) * AGE_UNIT_HOURS[Video.ageUnit(match[2])];
+        }
+        return undefined;
+    }
+
+    static ageUnit(text) {
+        const unit = text.toLowerCase();
+        if (unit.startsWith("mo")) return "month";
+        return {s: "second", m: "minute", h: "hour", d: "day", w: "week", y: "year"}[unit[0]];
+    }
+
     hide() {
         if (!this.hidden) {
             this.display = this.element.style.getPropertyValue("display");
@@ -53,3 +68,9 @@ Video.PROGRESS_SELECTOR = [
     "ytd-thumbnail-overlay-resume-playback-renderer #progress",
     "#progress.ytd-thumbnail-overlay-resume-playback-renderer"
 ].join(",");
+
+Video.AGE_SELECTOR = [
+    "#metadata-line", "#video-info", "ytd-video-meta-block", "yt-content-metadata-view-model"
+].join(",");
+
+Video.AGE_PATTERN = /(?<![\d.,])(\d+)\s*(years?|yrs?|y|months?|mos?|weeks?|wks?|w|days?|d|hours?|hrs?|h|minutes?|mins?|m|seconds?|secs?|s)\s+ago/i;

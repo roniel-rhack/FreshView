@@ -139,3 +139,35 @@ class ViewThresholdSlider extends Widget {
 
     save() { Storage.set({[VIEW_THRESHOLD_SLIDER_STORAGE_KEY]: Number(this.element.value)}); }
 }
+
+class AgeThresholdCheckbox extends Checkbox {
+    constructor() { super("age-threshold-checkbox", AGE_THRESHOLD_CHECKBOX_STORAGE_KEY, AGE_THRESHOLD_CHECKBOX_DEFAULT_STATE); }
+}
+
+class AgeThresholdSlider extends Widget {
+    constructor() {
+        super("age-threshold-slider", [AGE_THRESHOLD_CHECKBOX_STORAGE_KEY, AGE_THRESHOLD_SLIDER_STORAGE_KEY], AGE_THRESHOLD_SLIDER_DEFAULT_STATE);
+        this.load();
+        this.element.addEventListener("input", () => this.render());
+        this.element.addEventListener("change", () => this.save());
+    }
+    load() {
+        Storage.get({
+            [AGE_THRESHOLD_CHECKBOX_STORAGE_KEY]: AGE_THRESHOLD_CHECKBOX_DEFAULT_STATE,
+            [AGE_THRESHOLD_SLIDER_STORAGE_KEY]: this.fallback
+        }, values => {
+            this.element.disabled = !values[AGE_THRESHOLD_CHECKBOX_STORAGE_KEY];
+            this.element.value = values[AGE_THRESHOLD_SLIDER_STORAGE_KEY];
+            this.render();
+        });
+    }
+    render() {
+        const age = I18n.age(this.element.value);
+        document.getElementById("age-threshold-value").textContent = age;
+        document.getElementById("age-help").textContent = this.element.disabled
+            ? I18n.message("ageOff") : I18n.message("ageSummary", age);
+        this.element.setAttribute("aria-valuetext", age);
+    }
+
+    save() { Storage.set({[AGE_THRESHOLD_SLIDER_STORAGE_KEY]: Number(this.element.value)}); }
+}

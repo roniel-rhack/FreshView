@@ -103,6 +103,24 @@
     },
     "description": "$PERCENT$ watched"
   },
+  "ageTitle": {
+    "message": "公開期間のしきい値",
+    "description": "Age threshold"
+  },
+  "ageSummary": {
+    "message": "公開から $AGE$ を超えた動画を非表示にします。",
+    "placeholders": {
+      "age": {
+        "content": "$1",
+        "example": "6 months"
+      }
+    },
+    "description": "Hide videos older than $AGE$."
+  },
+  "ageOff": {
+    "message": "公開時期に関係なくすべての動画を表示します。",
+    "description": "Videos of any age are shown."
+  },
   "lockPage": {
     "message": "このページの設定を固定",
     "description": "Lock setting on this page"

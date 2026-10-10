@@ -34,6 +34,17 @@ const VIEW_THRESHOLD_CHECKBOX_DEFAULT_STATE = true;
 const VIEW_THRESHOLD_SLIDER_STORAGE_KEY = "view-threshold-slider-value";
 const VIEW_THRESHOLD_SLIDER_DEFAULT_STATE = 90;
 
+const AGE_THRESHOLD_CHECKBOX_STORAGE_KEY = "age-threshold-checkbox-state";
+const AGE_THRESHOLD_CHECKBOX_DEFAULT_STATE = false;
+const AGE_THRESHOLD_SLIDER_STORAGE_KEY = "age-threshold-slider-value";
+const AGE_THRESHOLD_SLIDER_DEFAULT_STATE = 13;
+const AGE_THRESHOLD_STEPS = [
+    [1, "hour"], [3, "hour"], [6, "hour"], [12, "hour"], [1, "day"], [2, "day"], [3, "day"],
+    [1, "week"], [2, "week"], [1, "month"], [2, "month"], [3, "month"], [6, "month"],
+    [1, "year"], [2, "year"], [5, "year"], [10, "year"], [15, "year"], [20, "year"]
+];
+const AGE_UNIT_HOURS = {second: 1 / 3600, minute: 1 / 60, hour: 1, day: 24, week: 168, month: 720, year: 8760};
+
 // Hide Videos
 const HIDE_VIDEOS_CHECKBOX_STORAGE_KEY = "hide-videos-checkbox-state";
 const HIDE_VIDEOS_CHECKBOX_DEFAULT_STATE = false;
@@ -75,5 +86,8 @@ const SETTINGS_DEFAULT_STATE = {
 
     // View Threshold
     [VIEW_THRESHOLD_CHECKBOX_STORAGE_KEY]: VIEW_THRESHOLD_CHECKBOX_DEFAULT_STATE,
-    [VIEW_THRESHOLD_SLIDER_STORAGE_KEY]: VIEW_THRESHOLD_SLIDER_DEFAULT_STATE
+    [VIEW_THRESHOLD_SLIDER_STORAGE_KEY]: VIEW_THRESHOLD_SLIDER_DEFAULT_STATE,
+
+    [AGE_THRESHOLD_CHECKBOX_STORAGE_KEY]: AGE_THRESHOLD_CHECKBOX_DEFAULT_STATE,
+    [AGE_THRESHOLD_SLIDER_STORAGE_KEY]: AGE_THRESHOLD_SLIDER_DEFAULT_STATE
 };

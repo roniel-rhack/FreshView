@@ -21,4 +21,4 @@ main { padding: 0 14px 16px; display: grid; gap: 12px; }
 input[type='range'] { accent-color: var(--accent-colour); flex: 1; min-width: 0; margin: 0; height: 28px; cursor: pointer; }
 input[type='range']:disabled { cursor: default; opacity: 0.5; }
 output { font-weight: 500; font-variant-numeric: tabular-nums; white-space: nowrap; }
-#threshold-help { padding: 10px 16px 16px; }
+#threshold-help, #age-help { padding: 10px 16px 16px; }
