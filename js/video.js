@@ -9,7 +9,8 @@ class Video {
         if (!link) return undefined;
         try {
             const url = new URL(link.getAttribute("href"), "https://www.youtube.com");
-            if (!Path.supported(url.href) || url.pathname !== "/watch") return undefined;
+            if (url.protocol !== "https:" || !["youtube.com", "www.youtube.com"].includes(url.hostname) ||
+                url.pathname !== "/watch") return undefined;
             const id = url.searchParams.get("v");
             return id && /^[\w-]+$/.test(id) ? id : undefined;
         } catch (_) {
@@ -29,12 +30,13 @@ class Video {
     }
 
     hide() {
-        if (!this.hidden) {
+        const display = this.element.style.display;
+        if (!this.hidden || display !== "none") {
             this.display = this.element.style.getPropertyValue("display");
             this.priority = this.element.style.getPropertyPriority("display");
             this.hidden = true;
         }
-        if (this.element.style.display !== "none") this.element.style.setProperty("display", "none", "important");
+        if (display !== "none") this.element.style.setProperty("display", "none", "important");
     }
 
     show() {

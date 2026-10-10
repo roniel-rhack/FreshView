@@ -22,7 +22,7 @@ class Extractor {
         return cards;
     }
 
-    static eligible(element, state) {
+    static eligible(element, state, path = Path.pathname(window.location.href)) {
         if (element.matches('[is-shorts], [is-ad]') ||
             element.closest('ytd-ad-slot-renderer, ytd-rich-section-renderer, ytd-reel-shelf-renderer') ||
             element.querySelector('ytd-ad-slot-renderer, ytd-display-ad-renderer, ad-badge-view-model, .yt-badge-shape--ad')) return false;
@@ -32,7 +32,6 @@ class Extractor {
 
         // Playlist/course summaries link to a starting video; they are not watched cards.
         if (element.querySelector('a[href*="list="], a[href^="/playlist"], a[href^="/shorts/"]')) return false;
-        const path = Path.pathname(window.location.href);
         if (element.matches('ytd-compact-video-renderer') ||
             element.closest('#related, #secondary, ytd-watch-next-secondary-results-renderer') ||
             (element.matches('yt-lockup-view-model') && path === "/watch")) {
@@ -42,11 +41,14 @@ class Extractor {
         return true;
     }
 
-    extract(root, threshold, state) {
-        return Array.from(Extractor.candidates(root))
-            .filter(element => Extractor.eligible(element, state))
-            .map(element => new Video(element))
-            .filter(video => video.getViewed(threshold));
+    extract(root, threshold, state, path = Path.pathname(window.location.href), existing) {
+        const videos = [];
+        for (const element of Extractor.candidates(root)) {
+            if (!Extractor.eligible(element, state, path)) continue;
+            const video = existing?.get(element) || new Video(element);
+            if (video.getViewed(threshold)) videos.push(video);
+        }
+        return videos;
     }
 }
 

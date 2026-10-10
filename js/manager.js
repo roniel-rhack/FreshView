@@ -24,12 +24,14 @@ class Manager {
 
     onMutations(records) {
         if (!this.active()) return;
-        let removed = false;
         for (const record of records) {
             const target = record.target;
             if (record.type === "attributes") {
-                // Card display writes are ours; progress styles are the host's.
-                if (record.attributeName === "style" && !target.matches(Video.PROGRESS_SELECTOR)) continue;
+                if (record.attributeName === "style" && !target.matches(Video.PROGRESS_SELECTOR)) {
+                    // Ignore our own hide writes, but recheck host visibility changes.
+                    if (this.album.videos.has(target) && target.style.display !== "none") this.pending.add(target);
+                    continue;
+                }
                 if (target.matches('ytd-browse, ytd-search, ytd-watch-flexy') && record.attributeName !== "style") {
                     this.request();
                     continue;
@@ -44,11 +46,16 @@ class Manager {
                         Extractor.candidates(node).forEach(candidate => this.pending.add(candidate));
                     }
                 }
-                removed ||= Array.from(record.removedNodes).some(node =>
-                    node instanceof Element && (node.matches(VIDEO_CARD_SELECTOR) || node.querySelector(VIDEO_CARD_SELECTOR)));
+                for (const node of record.removedNodes) {
+                    if (!(node instanceof Element)) continue;
+                    if (this.album.videos.has(node)) this.pending.add(node);
+                    node.querySelectorAll(VIDEO_CARD_SELECTOR).forEach(element => {
+                        if (this.album.videos.has(element)) this.pending.add(element);
+                    });
+                }
             }
         }
-        if (this.pending.size || removed) this.request(false);
+        if (this.pending.size) this.request(false);
     }
 
     request(full = true) {
@@ -77,22 +84,27 @@ class Manager {
             this.album.clear();
             return;
         }
+        const path = Path.pathname(window.location.href);
+        const threshold = this.settings.threshold();
         if (full) {
-            this.album.merge(this.extract());
+            this.album.merge(this.extract(path));
+            this.display();
         } else {
-            for (const element of this.album.videos.keys()) {
-                if (!element.isConnected) this.album.remove(element);
-            }
             for (const element of pending) {
+                if (!element.isConnected || Extractor.card(element) !== element ||
+                    !Extractor.eligible(element, this.settings.state, path)) {
+                    this.album.remove(element);
+                    continue;
+                }
                 const video = this.album.videos.get(element) || new Video(element);
-                if (element.isConnected && Extractor.eligible(element, this.settings.state) && video.getViewed(this.settings.threshold())) {
+                if (video.getViewed(threshold)) {
                     this.album.add(video);
+                    video.hide();
                 } else {
                     this.album.remove(element);
                 }
             }
         }
-        this.display();
         if (window.FRESHVIEW_DEBUG) console.debug("[FreshView] Poll", {full, checked: pending.size, hidden: this.album.getSize()});
     }
 
@@ -101,9 +113,9 @@ class Manager {
         else this.album.videos.forEach(video => video.hide());
     }
 
-    extract() {
+    extract(path) {
         if (!this.active()) return new Album();
-        return new Album(new Extractor().extract(document, this.settings.threshold(), this.settings.state));
+        return new Album(new Extractor().extract(document, this.settings.threshold(), this.settings.state, path, this.album.videos));
     }
 
     dispose() {
